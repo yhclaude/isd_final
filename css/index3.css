@@ -8,16 +8,28 @@ body {
 	right: 40px;
 	top: 20px;
 }
-.tabPage {
-	width: 700px;
-	margin: auto;
-	padding: 10px 20px;
+
+.tabPage nav {
+	text-align: center;
+}
+
+.tabs nav ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	display: inline-block;
+}
+
+.tabPage > ul > li {
+	width: calc((100% / 3) - 22px);
+
 }
 .tabPage > ul > li > a {
 	font-size: 20px;
 	font-weight: 900;
+
 	color:  rgb(183, 183, 183);
-	width: 195px;
+	width: auto;
 	text-align : center;
 }
 .nav-tabs {
@@ -105,4 +117,27 @@ hr {
 p {
 	color: #B9B9B9;
 	font: bold;
+}
+
+.login-button {
+	color: #B9B9B9;
+	font: bold;
+	width: 30px;
+	height: 40px;
+}
+
+.modal-header-close {
+	min-height:16.43px;
+	padding:15px;
+	solid #e5e5e5;
+}
+
+.login-modal {
+	height: calc(100vh / 3 * 2);
+}
+
+@media only screen and (max-height: 400px) {
+    .login-modal {
+        height: 300px;
+    }
 }
