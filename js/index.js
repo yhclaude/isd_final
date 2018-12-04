@@ -3,12 +3,12 @@ $(function(){
 	var windowHeight=$(window).height();
 	var contentTop;
 	var flag=true;//页面滑动中判断
-	function bgInitial(){	
+	function bgInitial(){
 		windowWid=$(window).width();
 		//console.log(windowHeight);
 		windowHeight=$(window).height();
 		var index=$('#cirPanel').find('.active').index();
-		
+
 		$('#content').stop(true);//如果在
 		$('#content').css({"top":-index*windowHeight});
 		//console.log(index);
@@ -69,36 +69,36 @@ $(function(){
 			changeCircle(3);
 		}
 	}
-	function scrollChange(e) {  
-		e = e || window.event;  
+	function scrollChange(e) {
+		e = e || window.event;
 		contentTop=parseInt($('#content').css('top'))
 		if(flag){
-			if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件               
-				if (e.wheelDelta > 0) { //当滑轮向上滚动时  
+			if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件
+				if (e.wheelDelta > 0) { //当滑轮向上滚动时
 					scrollUp();
-				}  
-				else if (e.wheelDelta < 0) { //当滑轮向下滚动时  
+				}
+				else if (e.wheelDelta < 0) { //当滑轮向下滚动时
 					scrollDown();
-				}  
-			} 
-			else if (e.detail) {  //Firefox滑轮事件  
-				if (e.detail<0) { //当滑轮向上滚动时  
+				}
+			}
+			else if (e.detail) {  //Firefox滑轮事件
+				if (e.detail<0) { //当滑轮向上滚动时
 						scrollUp();
-				}  
-				else if (e.detail>0) { //当滑轮向下滚动时  
+				}
+				else if (e.detail>0) { //当滑轮向下滚动时
 						scrollDown();
-				}  
-			}  
+				}
+			}
 		}
-		
+
 	}//鼠标滚动时
-	if (document.addEventListener) {//firefox  
-		document.addEventListener('DOMMouseScroll', scrollChange, false);  
-	}  
+	if (document.addEventListener) {//firefox
+		document.addEventListener('DOMMouseScroll', scrollChange, false);
+	}
 	window.onmousewheel = scrollChange;//鼠标滚动时
 	$(window).resize(bgInitial);//窗口大小改变时
 	bgInitial();//初始化
-	
+
 	//右边的点点
 	$('#cirPanel li').each(function(i){
 		$(this).click(function(){
@@ -128,10 +128,12 @@ $(function(){
 					}
 				})
 			}
-			
+
 		})
 	})
 	//判断冒泡事件 控制导航条
-	
+	function(){
+	  $("#footer").load("./template/footer.html");
+	  console.log("123");
+  	}
 })
-	
