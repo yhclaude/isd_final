@@ -23,10 +23,10 @@
 - [ ] Sending Email via Google account and upload image on googledrive
 
 ## Back-end
-- [ ] Wrap up all APIs and check user session before request to airtable
+- [x] Wrap up all APIs and check user session before request to airtable
 - [ ] Link all data into front end
 - [ ] Send an email to subscribers when a stuff post a new announcement
-- [ ] Encrypt session
+- [x] Encrypt session
 - [ ] Exception/Error handle
 
 
@@ -139,5 +139,21 @@ http://localhost/isd_final/connection/index.php/users/rec0eMTQiJn7JxDHn
 {
     "code":404
     "msg": "Something wrong!"
+}
+```
+
+---
+#### Login API
+url: http://localhost/isd_final/connection/index.php/users/login?account=demo@pitt.edu&password=1234
+
+response:
+```
+{
+    "code":200,
+    "data": {
+             "sess":"rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg==",
+             "username":"staffA",
+             "id":"recKxzLdiLvhgga16"
+             }
 }
 ```
