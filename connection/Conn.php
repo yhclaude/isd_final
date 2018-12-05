@@ -7,7 +7,7 @@ class Conn
     public function __construct()
     {
         $this->ATkey = Configs::AIR_TABLE_KEY;
-        $this->ATId = Configs::AIR_TABLE_APP_ID;
+        $this->ATId  = Configs::AIR_TABLE_APP_ID;
         // $this->getArrays(['model'=>'Voyager.com']);
         //postItem
         // $this->postItem(['model'=>'Voyager.com']);
@@ -30,7 +30,7 @@ class Conn
         $result = curl_exec($ch);
         curl_close($ch);
 
-        echo $result;
+        return $result;
     }
 
     public function updateItem($params) {
@@ -53,7 +53,7 @@ class Conn
         if(!$response) {
             return false;
         }
-        echo json_encode($response);
+        return json_encode($response);
     }
 
     public function postItem($params) {
@@ -72,7 +72,7 @@ class Conn
             'Content-Length: ' . strlen($data_string))
         );
         $result = curl_exec($ch);
-        echo $result;
+        return $result;
     }
 
     public function getArrays($params) {
@@ -90,16 +90,25 @@ class Conn
             exit ();
         }
         curl_close ( $ch );
-        echo $file_contents;
+        $res = json_decode($file_contents, true);
+        return json_encode(['code'=>200, 'data'=>$res['records']]);
     }
 
     public function getUrl($params) {
-        if (isset($params['id'])) {
-            $url = "https://api.airtable.com/v0/".$this->ATId."/".$params['model']."/".$params['id'];
+        $segs = $params['segs'];
+        if (count($segs)>1) {
+            $url = "https://api.airtable.com/v0/".$this->ATId."/".$params['segs'][0]."/".$params['segs'][1];
         } else {
-            $url = "https://api.airtable.com/v0/".$this->ATId."/".$params['model'];
+            $url = "https://api.airtable.com/v0/".$this->ATId."/".$params['segs'][0];
         }
         $url = $url."?api_key=".$this->ATkey;
+
+        $queries = $params['queries'];
+        if (isset($queries) && count($queries) >= 0) {
+            foreach ($queries as $k => $v) {
+                $url.=('&'.$k.'='.$v);
+            }
+        }
         return $url;
     }
 }
