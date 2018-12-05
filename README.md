@@ -146,7 +146,7 @@ http://localhost/isd_final/connection/index.php/users/rec0eMTQiJn7JxDHn
 #### Login API
 url: http://localhost/isd_final/connection/index.php/users/login?account=demo@pitt.edu&password=1234
 
-response:
+* response:
 ```
 {
     "code":200,
@@ -155,5 +155,36 @@ response:
              "username":"staffA",
              "id":"recKxzLdiLvhgga16"
              }
+}
+```
+
+
+---
+
+#### Pagination
+url: http://localhost/isd_final/connection/index.php/logs?pageSize=1&maxRecords=5&sess=rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg==
+* parameters:
+    *pageSize: To limit how many data return in a page
+    *maxRecords(optional): Default is 100
+    *sess:
+* response:
+```
+{  
+   "code":200,
+   "data":[  
+      {  
+         "id":"recGj9iDau1OtXjr4",
+         "fields":{  
+            "log_id":6,
+            "user_id":1,
+            "user_name":"StaffA",
+            "working_machine":"3d printer",
+            "start_time":"12\/5\/2018 17:21",
+            "end_time":"12\/5\/2018 18:21"
+         },
+         "createdTime":"2018-12-05T23:21:28.000Z"
+      }
+   ],
+   "offset":"itrtai8qEHKxUvSkE\/recGj9iDau1OtXjr4"
 }
 ```

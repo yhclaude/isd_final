@@ -91,7 +91,11 @@ class Conn
         }
         curl_close ( $ch );
         $res = json_decode($file_contents, true);
-        return json_encode(['code'=>200, 'data'=>$res['records']]);
+        if (isset($res['offset'])) {
+            return json_encode(['code'=>200, 'data'=>$res['records'], 'offset'=>$res['offset']]);
+        } else {
+            return json_encode(['code'=>200, 'data'=>$res['records']]);
+        }
     }
 
     public function getUrl($params) {
