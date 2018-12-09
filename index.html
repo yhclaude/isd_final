@@ -41,7 +41,7 @@
                                     Now We are streaming
                                 </div>
                                 <div class="open_lab_content">
-                                    <img src="images/video_stream.png" />
+                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/[INSERT_ID]?autoplay=1&origin=http://example.com" frameborder="0"></iframe>
                                 </div>
                             </div>
                             <div>
@@ -239,7 +239,7 @@ $(function(){
 });
 
 function login() {
-    console.log("./connection/index.php/users/login?account="+$("#inputName").text+"&password="$("#inputPassword").text);
+    console.log("./connection/index.php/users/login?account="+$("#inputName").text+"&password="+$("#inputPassword").text);
     // $.ajax({
     //     url: "./connection/index.php/users/login?account="+$("#inputName").text+"&password="$("#inputPassword").text
     //   }).done(function(data) {
