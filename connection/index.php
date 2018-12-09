@@ -13,7 +13,10 @@ $user = new Users();
 if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     echo $user->login($r);
     return;
-} else {
+} else if ($r['segs'][0] == 'logs') {
+    $r['queries']['sort'] = '&sort%5B0%5D%5Bfield%5D=log_id&sort%5B0%5D%5Bdirection%5D=desc';
+
+}else {
     // $decode = $user->decodeSess($r['queries']['sess']);
     // if (!isset($decode)) {
     //     echo json_encode(['code'=>500, 'msg'=>'Missing session or expired.']);

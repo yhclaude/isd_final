@@ -110,8 +110,12 @@ class Conn
         $queries = $params['queries'];
         if (isset($queries) && count($queries) >= 0) {
             foreach ($queries as $k => $v) {
+                if ($k == 'sort') continue;
                 $url.=('&'.$k.'='.$v);
             }
+        }
+        if(isset($queries['sort'])) {
+            $url.=$queries['sort'];
         }
         return $url;
     }
