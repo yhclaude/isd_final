@@ -205,18 +205,27 @@
 							$('.right-content-ul').find('li').eq(i).append($div1).append($div2).append($div3);
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
+							// name 
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
+
+							// working_machine
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
+
+							// start_time
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+
+							// end_time
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(1).append($divDeleteButton);
 
+
+							// edit and delete with id
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_log_edit.html?user_id='+res.data[i].id);
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
 							if (res.offset) {
@@ -255,7 +264,7 @@
 			})
 		}
 
-		// next page http://localhost/isd_final/connection/index.php/logs
+		// next page api route
 		$('.page-next a').click(function() {
 			changePage(1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
