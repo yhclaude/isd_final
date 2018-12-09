@@ -12,11 +12,12 @@ Class Users {
         $conn = new Conn();
         $queries = $params['queries'];
         $users = $conn->getArrays(['segs'=>['users']]);
+
         $users = json_decode($users, true);
-        $result = ['code'=>404, 'msg'=>'Login fail'];
+        $result = ['code'=>404, 'msg'=>'Login failed'];
 
         // TODO: search for specific user
-        foreach ($users['records'] as $u) {
+        foreach ($users['data'] as $u) {
             if ($u['fields']['account'] === $queries['account'] && $u['fields']['password'] === $queries['password']) {
                 $user = $u;
                 break;

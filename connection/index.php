@@ -14,19 +14,19 @@ if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     echo $user->login($r);
     return;
 } else {
-    $decode = $user->decodeSess($r['queries']['sess']);
-    if (!isset($decode)) {
-        echo json_encode(['code'=>500, 'msg'=>'Missing session or expired.']);
-        return;
-    } else {
-        $today = date("Y-m-d", time());
-        $today = date("Y-m-d", strtotime("$today + 1 day"));
-        $sess_date = date("Y-m-d", strtotime($decode['expire_date']));
-        if ($today != $sess_date) {
-            echo json_encode(['code'=>500, 'msg'=>'Missing session or expired.', 'debug'=>[$sess_date, $today]]);
-            return;
-        }
-    }
+    // $decode = $user->decodeSess($r['queries']['sess']);
+    // if (!isset($decode)) {
+    //     echo json_encode(['code'=>500, 'msg'=>'Missing session or expired.']);
+    //     return;
+    // } else {
+    //     $today = date("Y-m-d", time());
+    //     $today = date("Y-m-d", strtotime("$today + 1 day"));
+    //     $sess_date = date("Y-m-d", strtotime($decode['expire_date']));
+    //     if ($today != $sess_date) {
+    //         echo json_encode(['code'=>500, 'msg'=>'Missing session or expired.', 'debug'=>[$sess_date, $today]]);
+    //         return;
+    //     }
+    // }
 }
 
 $conn = new Conn();
