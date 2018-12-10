@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
     <title>Open Lab</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/index3.css" rel="stylesheet">
     <style>
     </style>
 </head>
+
 <body>
-	<div class="upperRightButton">
-		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Subscribe</button>
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Contact Us</button>
-	</div>
+    <div class="upperRightButton">
+        <button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Subscribe</button>
+        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default">Contact Us</button>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
@@ -91,7 +95,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="schedule">
                             <div class="row">
-                                    <iframe src="https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt"></iframe>
+                                <iframe src="https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt"></iframe>
                             </div>
                         </div>
                     </div>
@@ -105,21 +109,22 @@
             <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
                 <div class="modal-header-close">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
-                        <span aria-hidden="true" >&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
                     <form role="form">
                         <div class="form-group">
                             <label for="title" style="color: white;font-size: 18px;"><b>Subscribe Open Lab</b></label>
-                            <br/>
+                            <br />
                         </div>
                         <div class="form-group">
                             <label for="email" style="color: white; font-size: 16px;">Email</label>
                             <input type="text" class="form-control" id="email" placeholder="abc@pitt.edu">
                         </div>
                         <div class="form-group">
-                            <label for="interest topic"style="color: white; font-size: 16px;">Tell us what you're interested in</label>
+                            <label for="interest topic" style="color: white; font-size: 16px;">Tell us what you're
+                                interested in</label>
                             <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
                                 <div class="checkbox">
                                     <label><input type="checkbox" value="">Virtual Reality</label>
@@ -136,7 +141,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="formButton"style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
+                            <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
                                 <button type="button" class="btn btn-default">Subscribe</button>
                             </div>
                         </div>
@@ -151,107 +156,64 @@
             <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
                 <div class="modal-header-close">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
-                        <span aria-hidden="true" >&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     Hi, Welcome back!
                     <div class="row">
                         <form>
-                        <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Account</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputName">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Account</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword">
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10 formButton">
-                                <!-- <button type="button" class="btn btn-default" id="login()">Login</button> -->
-                                <button type="button" name="button" class="btn btn-default" onclick="login()">Login</button>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10 formButton">
+                                    <!-- <button type="button" class="btn btn-default" id="login()">Login</button> -->
+                                    <button type="button" name="button" class="btn btn-default" onclick="login()">Login</button>
+                                </div>
                             </div>
-                        </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- This is the staff Modal, for now link to Contact Us button -->
-    <!-- <div id="staffModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
-                <div class="modal-header-close">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
-                        <span aria-hidden="true" >&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
-                            <br/><br/>
-                        </div>
-                        <div class="form-group">
-                            <label for="hours" style="color: white; font-size: 16px;"></label>
-                            <input type="text" class="form-control" id="name" placeholder="abc@pitt.edu">
-                        </div>
-                        <div class="form-group">
-                            <label for="interest topic"style="color: white; font-size: 16px;">Tell us what you're interested in</label>
-                            <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">Virtual Reality</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">3D printing</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">360° Video Camera & Viewer</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">360° Video Projector</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="formButton"style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
-                                <button type="button" class="btn btn-default">Post</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- The above is the staff Modal, for now link to Contact Us button -->
+
+
 </body>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/user.js"></script>
 <script>
-$(function(){
-  $("#footer").load("./template/footer.html");
-});
+    $(function () {
+        $("#footer").load("./template/footer.html");
+    });
 
-function login() {
-    console.log("./connection/index.php/users/login?account="+$("#inputName").text+"&password="+$("#inputPassword").text);
-    // $.ajax({
-    //     url: "./connection/index.php/users/login?account="+$("#inputName").text+"&password="$("#inputPassword").text
-    //   }).done(function(data) {
-    //       // console.log(data);
-    //        var res = JSON.parse(data);
-    //        if (res.code == 200) {
-    //            subcategorys = res.data;
-    //        } else {
-    //            console.log('fail to load category');
-    //            alert('Failed to load sub-categories');
-    //        }
-    //   });
-}
+    function login() {
+        console.log("./connection/index.php/users/login?account=" + $("#inputName").text + "&password=" + $(
+            "#inputPassword").text);
+        // $.ajax({
+        //     url: "./connection/index.php/users/login?account="+$("#inputName").text+"&password="$("#inputPassword").text
+        //   }).done(function(data) {
+        //       // console.log(data);
+        //        var res = JSON.parse(data);
+        //        if (res.code == 200) {
+        //            subcategorys = res.data;
+        //        } else {
+        //            console.log('fail to load category');
+        //            alert('Failed to load sub-categories');
+        //        }
+        //   });
+    }
 </script>
+
 </html>
