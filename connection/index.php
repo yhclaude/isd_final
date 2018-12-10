@@ -5,7 +5,7 @@ include_once('users.php');
 $r = serializeURL();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" || $_SERVER['REQUEST_METHOD'] === "PUT") {
-    $r['params'] = extractParameters();
+    $r['queries'] = extractParameters();
 }
 
 // Check session
@@ -42,6 +42,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         echo $conn->updateItem($r);
         break;
     case 'POST':
+    echo json_encode($r);
         echo $conn->postItem($r);
         break;
     case 'DELETE':
@@ -64,13 +65,6 @@ function serializeURL() {
 
 function extractParameters() {
     $target = [];
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $target = $_POST;
-    } else {
-        parse_str(file_get_contents("php://input"),$target);
-    }
-    foreach ($target as $key => $value) {
-        $res[$key] = $value;
-    }
+    $res = json_decode(file_get_contents("php://input"), true);
     return $res;
 }

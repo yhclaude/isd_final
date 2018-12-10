@@ -124,8 +124,8 @@
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
-					<li><a href="./admin_device.html" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn active" role="button">Logs</a></li>
+					<li><a href="#" class="btn active" role="button">Devices</a></li>
+					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
 
 				</ul>
 			</div>
@@ -162,38 +162,6 @@
 		// var cache = {}
 
 		// ajax changePage
-		test();
-		function test() {
-			console.log("ewqeq");
-			var param = {
-	            "subscriber_name": "Eden",
-	            "subscriber_email": "tat73@pitt.edu",
-	            "subscriber_preference": "c07$1143",
-	            "subscriber_isActive": "true"
-	        }
-
-        var saveData = $.ajax({
-                  type: 'POST',
-                  url: "http://localhost/isd_final/connection/index.php/subscribers?&sess=rFIAeA83nEiB",
-                  data: param,
-                  dataType: "text",
-                  success: function(resultData) {
-					  console.log(resultData);
-                    // console.log("Save Complete: "+resultData);
-                    // var res = JSON.parse(resultData);
-                    // if (res.code == 200) {
-                    //     // refresh page
-                    //     console.log("RELOAD");
-                    //     // TODO: pop up modal view
-                    //     location.reload();
-                    // } else {
-                    //     console.log('fail to load customers');
-                    //     alert('Failed to create this customer');
-                    // }
-                  }
-            });
-            saveData.error(function(e) { alert("Something went wrong: "+e); });
-		}
 		function changePage(pages, url, type, asy = false) {
 			var val = parseInt($('#pageNumber').html()) + pages;
 			$('#pageNumber').html(val);
@@ -223,8 +191,8 @@
 							$div1 = $('<div class="row"></div>');
 							$div2 = $('<div class="row"></div>');
 							$div3 = $('<div class="function-div"></div>');
-							$divName = $('<div class="col-md-4">Name: </div>');
-							$divWork = $('<div class="col-md-7">Working_machine: </div>');
+							$divName = $('<div class="col-md-4">Device name: </div>');
+							$divWork = $('<div class="col-md-7">Is availabe: </div>');
 							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
 							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
 							$divStart = $('<div class="col-md-4">Start: </div>');
@@ -238,19 +206,19 @@
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
 							// name
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append("1234");//'<span>' + res.data[i].fields.user_name + '</span>'
 
 							// working_machine
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append("DQDWQ");//'<span>' + res.data[i].fields.working_machine + '</span>'
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
-
-							// start_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
-
-							// end_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
+							//
+							// // start_time
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+							//
+							// // end_time
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
