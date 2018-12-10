@@ -108,8 +108,8 @@
 </head>
 <body class="admin-body">
 	<div class="upperRightButton">
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Update</button>
-		<button data-toggle="modal" data-target="#" type="button" class="btn btn-default">Switch Mode</button>
+		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
 	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
@@ -124,8 +124,8 @@
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
-					<li><a href="./admin_device.html" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn active" role="button">Logs</a></li>
+					<li><a href="#" class="btn active" role="button">Devices</a></li>
+					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
 
 				</ul>
 			</div>
@@ -150,64 +150,6 @@
 		</div>
 
 	</div>
-
-    <div id="staffModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
-                <div class="modal-header-close">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="padding-top: 50px;padding-right: 140px;padding-bottom: 50px;padding-left: 140px;">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
-                            <br /><br />
-                        </div>
-                        <div class="form-group">
-                            <label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
-                            <br />
-                            <span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
-                                <input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
-                                    placeholder="13:00 -- 17:00">
-                            </span>
-                        </div>
-                        <br /><br />
-                        <div class="form-group">
-                            <span>
-                                <label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
-                                <!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
-                            </span>
-                            <br />
-
-                            <span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
-                                <select style="width: 75%">
-                                    <option value="1">V</option>
-                                    <option value="2">S</option>
-                                    <option value="3">O</option>
-                                    <option value="4">A</option>
-                                </select>
-                            </span>                            
-                        </div>
-                        <br /><br />
-                    <div class="form-group">
-                        <label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
-                        <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
-                            <textarea class="form-control" rows="4" cols="50" name="current event" required></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
-                            <button type="button" class="btn btn-default">Post</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
-
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
@@ -215,10 +157,12 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
+		$('#pageNumber').data('offset',['']);
+
 		// var cache = {}
 
 		// ajax changePage
-		function changePage(pages, url, type, asy = true) {
+		function changePage(pages, url, type, asy = false) {
 			var val = parseInt($('#pageNumber').html()) + pages;
 			$('#pageNumber').html(val);
 			if (val == 1) {
@@ -227,9 +171,9 @@
 				$('.page-pre a').removeAttr('disabled');
 			}
 			var getParams = {
-				pageNumber: val,
-				maxRecords: 10,
-				sess: 'rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg=='
+				pageSize: 4,
+				sess: 'rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg==',
+				offset: $('#pageNumber').data('offset')[val-1]
 			}
 			$.ajax({
 				url: url,
@@ -242,12 +186,13 @@
 						$('.page-next a').removeAttr('disabled');
 						$('.right-content-ul').html('');
 						$.each(res.data, function(i) {
+
 							$li = $('<li></li>');
 							$div1 = $('<div class="row"></div>');
 							$div2 = $('<div class="row"></div>');
 							$div3 = $('<div class="function-div"></div>');
-							$divName = $('<div class="col-md-4">Name: </div>');
-							$divWork = $('<div class="col-md-7">Working_machine: </div>');
+							$divName = $('<div class="col-md-4">Device name: </div>');
+							$divWork = $('<div class="col-md-7">Is availabe: </div>');
 							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
 							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
 							$divStart = $('<div class="col-md-4">Start: </div>');
@@ -260,19 +205,27 @@
 							$('.right-content-ul').find('li').eq(i).append($div1).append($div2).append($div3);
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
-							// name 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
+							// name
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append("1234");//'<span>' + res.data[i].fields.user_name + '</span>'
+
+							// working_machine
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append("DQDWQ");//'<span>' + res.data[i].fields.working_machine + '</span>'
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
+							//
+							// // start_time
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+							//
+							// // end_time
+							// $('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(1).append($divDeleteButton);
 
+
+							// edit and delete with id
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_log_edit.html?user_id='+res.data[i].id);
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
 							if (res.offset) {
@@ -282,7 +235,7 @@
 							} else {
 								$('.page-next a').attr('disabled', 'true');
 							}
-							
+
 						})
 						// click show hide
 						$('.right-content-ul > li').each(function(){
@@ -302,8 +255,8 @@
 					else {
 						var val = parseInt($('#pageNumber').html()) - 1;
 						$('#pageNumber').html(val);
-						
-					}	
+
+					}
 				},
 				error: function(err) {
 					console.log(err.responseText);
@@ -311,15 +264,15 @@
 			})
 		}
 
-		// next page http://localhost/isd_final/connection/index.php/logs
+		// next page api route
 		$('.page-next a').click(function() {
-			changePage(1, 'test.php', 'get');
+			changePage(1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
 		$('.page-next a').click();
 
 
 		$('.page-pre a').click(function() {
-			changePage(-1, 'test.php', 'get');
+			changePage(-1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
 	})
 </script>

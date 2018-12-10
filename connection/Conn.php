@@ -61,6 +61,7 @@ class Conn
         $queries = $params['queries'];
         $data['fields'] = $queries;
         $data['typecast'] = true;
+        // return json_encode($params);
         $data_string = json_encode($data);
 
         $ch = curl_init($url);
