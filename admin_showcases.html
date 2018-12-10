@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
+	<title>Open Lab</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		
+		body.admin-body {
+			color: rgb(112, 112, 112);
+		}
+
+		.upperRightButton {
+			position: absolute;
+			right: 40px;
+			top: 20px;
+		}
+
+		.upperRightButton button, body.admin-body a.btn.active {
+			background-color: rgb(24, 123, 119);
+			color: rgb(224, 224, 224);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+
+		body.admin-body a.btn {
+			background-color: rgb(244, 244, 244);
+			color: rgb(112, 112, 112);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+		li.page-item.active>a.page-link {
+			background-color: rgb(24, 123, 119);
+		}
+
+		.admin-page {
+			margin-top: 50px;
+		}
+
+		.admin-page .admin-header {
+			margin-bottom: 10px;
+			font-weight: 700;
+			font-size: 22px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu {
+			border-right: 1px solid #e2e2e2;
+			padding: 0px 10px 10px 5px;
+		}
+	
+		.admin-content .left-navbar .left-navbar-menu li {
+			margin-bottom: 10px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu a {
+			width: 90%;
+			text-align: left;
+		}
+
+		.right-content-ul > li {
+			font-size: 16px;
+			padding: 15px;
+			width: 95%;
+			border: 1px solid #e2e2e2;
+			border-radius: 5px;
+			background-color: rgb(244, 244, 244);
+			margin-bottom: 15px;
+			position: relative;
+		}
+
+		.function-div{
+			width: 100px;
+			background-color: rgb(244, 244, 244);
+			position: absolute;
+			right: -80px;
+			top: 45px;
+			border: 1px solid #e2e2e2;
+			border-radius: 5px;
+			z-index: 2;
+			display: none;
+
+		}
+		.function-div > div {
+			padding-left: 25px;
+		}
+		.function-div > div > a{
+			padding: 5px;
+			color: rgb(112,112,112);
+		}
+		.edit {
+			border-bottom: 1px solid #e2e2e2;
+		}
+
+		.pull-right.pagination {
+			margin-right: 35px;
+		}
+		.right-content-ul button {
+			background-color: rgb(244, 244, 244);
+			font-size: 18px;
+			padding-bottom: 0;
+		}
+	</style>
+</head>
+<body class="admin-body">
+	<div class="upperRightButton">
+		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+	</div>
+	<div class="admin-page container">
+		<div class="admin-header">
+			Content Management
+		</div>
+		<div class="row admin-content">
+			<div class="col-md-3 left-navbar">
+				<ul class="left-navbar-menu">
+					<li><a href="#" class="btn active" role="button">Users</a></li>
+					<li><a href="#" class="btn" role="button">Events</a></li>
+					<li><a href="#" class="btn" role="button">Video Links</a></li>
+					<li><a href="#" class="btn" role="button">Showcases</a></li>
+					<li><a href="#" class="btn" role="button">Appointments</a></li>
+					<li><a href="#" class="btn" role="button">Subscribes</a></li>
+					<li><a href="#" class="btn" role="button">Devices</a></li>
+					<li><a href="#" class="btn" role="button">Logs</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-md-9 right-content">
+				<ul class="right-content-ul">
+					
+				</ul>
+				<div class="pull-right pagination">
+					<ul class="pagination">
+						<li class="page-item page-pre">
+							<a disabled="true" class="btn page-link">‹</a>
+						</li>
+						<li class="page-item active">
+							<a id="pageNumber" class="page-link">0</a>
+						</li>
+						<li class="page-item page-next">
+							<a class="page-link btn">›</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+			
+	</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-en-US.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#pageNumber').data('offset',['']);
+
+		// var cache = {}
+
+		// ajax changePage
+		function changePage(pages, url, type, asy = false) {
+			var val = parseInt($('#pageNumber').html()) + pages;
+			$('#pageNumber').html(val);
+			if (val == 1) {
+				$('.page-pre a').attr('disabled', 'true');
+			} else {
+				$('.page-pre a').removeAttr('disabled');
+			}
+			var getParams = {
+				pageSize: 4,
+				sess: 'rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg==',
+				offset: $('#pageNumber').data('offset')[val-1]
+			}
+			$.ajax({
+				url: url,
+				type: type,
+				data: getParams,
+				async: asy,
+				dataType:'json',
+				success: function(res) {
+					if(parseInt(res.code) == 200) {
+						$('.page-next a').removeAttr('disabled');
+						$('.right-content-ul').html('');
+						$.each(res.data, function(i) {
+
+							$li = $('<li></li>');
+							$div1 = $('<div class="row"></div>');
+							$div2 = $('<div class="row"></div>');
+							$div3 = $('<div class="function-div"></div>');
+							$divName = $('<div class="col-md-4">Title: </div>');
+							$divWork = $('<div class="col-md-7">Author: </div>');
+							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
+							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
+							$divStart = $('<div class="col-md-4">Time: </div>');
+							$divEnd = $('<div class="col-md-8">Description: </div>');
+							$divEdit = $('<div class="edit"></div>');
+							$divDelete = $('<div></div>');
+							$divEditButton = $('<a type="button">Edit</a>');
+							$divDeleteButton = $('<a type="button">Delete</a>');
+							$('.right-content-ul').append($li);
+							$('.right-content-ul').find('li').eq(i).append($div1).append($div2).append($div3);
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
+
+							// name 
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.showcase_title + '</span>');
+
+							// working_machine
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.showcase_author + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
+
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
+
+							// start_time
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.showcase_time + '</span>');
+
+							// end_time
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.showcase_description + '</span>');
+
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(1).append($divDeleteButton);
+
+
+							// edit and delete with id
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_showcases_edit.html?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							if (res.offset) {
+								var offsetArr = $('#pageNumber').data('offset');
+								offsetArr[$('#pageNumber').html()] = res.offset;
+								$('#pageNumber').data('offset',offsetArr);
+							} else {
+								$('.page-next a').attr('disabled', 'true');
+							}
+							
+						})
+						// click show hide
+						$('.right-content-ul > li').each(function(){
+							$(this).find('.showEditDelete > button').click(function(e) {
+								$(this).closest('li').find('.function-div').show();
+								$(document).one("click", function(){
+									$('.right-content-ul > li > .function-div').hide();
+								});
+								e.stopPropagation();
+
+							});
+							$(this).find('.function-div').click(function(e) {
+								e.stopPropagation();
+							})
+						})
+					} 
+					else {
+						var val = parseInt($('#pageNumber').html()) - 1;
+						$('#pageNumber').html(val);
+						
+					}	
+				},
+				error: function(err) {
+					console.log(err.responseText);
+				}
+			})
+		}
+
+		// next page api route
+		$('.page-next a').click(function() {
+			changePage(1, 'http://localhost/isd_final/connection/index.php/showcases', 'get');
+		});
+		$('.page-next a').click();
+
+
+		$('.page-pre a').click(function() {
+			changePage(-1, 'http://localhost/isd_final/connection/index.php/showcases', 'get');
+		});
+	})
+</script>
+	
+</body>
+</html>
