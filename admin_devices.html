@@ -118,13 +118,13 @@
 		<div class="row admin-content">
 			<div class="col-md-3 left-navbar">
 				<ul class="left-navbar-menu">
-					<li><a href="#" class="btn active" role="button">Users</a></li>
+					<li><a href="#" class="btn" role="button">Users</a></li>
 					<li><a href="#" class="btn" role="button">Events</a></li>
 					<li><a href="#" class="btn" role="button">Video Links</a></li>
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
-					<li><a href="#" class="btn" role="button">Devices</a></li>
+					<li><a href="#" class="btn active" role="button">Devices</a></li>
 					<li><a href="#" class="btn" role="button">Logs</a></li>
 					
 				</ul>
@@ -192,11 +192,11 @@
 							$div2 = $('<div class="row"></div>');
 							$div3 = $('<div class="function-div"></div>');
 							$divName = $('<div class="col-md-4">Name: </div>');
-							$divWork = $('<div class="col-md-7">Work: </div>');
+							$divWork = $('<div class="col-md-7"> </div>');
 							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
 							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
-							$divStart = $('<div class="col-md-4">Start Time: </div>');
-							$divEnd = $('<div class="col-md-8">End Time: </div>');
+							$divStart = $('<div class="col-md-4">Working: </div>');
+							$divEnd = $('<div class="col-md-8">Available: </div>');
 							$divEdit = $('<div class="edit"></div>');
 							$divDelete = $('<div></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
@@ -206,19 +206,27 @@
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
 							// name 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.device_name + '</span>');
 
 							// working_machine
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
+//							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
 
 							// start_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+                            $isWorking = "No";
+                            if (res.data[i].fields.device_isWorking) {
+                                $isWorking = "Yes";
+                            }
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + $isWorking + '</span>');
 
 							// end_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
+                            $isAvailable = "No";
+                            if (res.data[i].fields.device_isAvailable) {
+                                $isAvailable = "Yes";
+                            }
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + $isAvailable + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
@@ -226,7 +234,7 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_log_edit.html?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_devices_edit.html?user_id='+res.data[i].id);
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
@@ -266,13 +274,13 @@
 
 		// next page api route
 		$('.page-next a').click(function() {
-			changePage(1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
+			changePage(1, 'http://localhost/isd_final/connection/index.php/devices', 'get');
 		});
 		$('.page-next a').click();
 
 
 		$('.page-pre a').click(function() {
-			changePage(-1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
+			changePage(-1, 'http://localhost/isd_final/connection/index.php/devices', 'get');
 		});
 	})
 </script>
