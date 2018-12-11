@@ -26,7 +26,7 @@
 		}
 
 		.upperRightButton button, body.admin-body a.btn.active {
-			background-color: #1c2957;;
+			background-color: #1c2957;
 			color: rgb(224, 224, 224);
 			font-size: 16px;
 			padding: 4px 10px;
@@ -39,7 +39,7 @@
 			padding: 4px 10px;
 		}
 		li.page-item.active>a.page-link {
-			background-color: #1c2957;;
+			background-color: #1c2957;
 		}
 
 		.admin-page {
@@ -60,7 +60,7 @@
 		}
 
 		.admin-header > .addButton > a.btn {
-			background-color: rgb(24, 123, 119);
+			background-color: #1c2957;
 			color: rgb(224, 224, 224);
 		}
 
@@ -125,7 +125,7 @@
 <body class="admin-body">
 	<div class="upperRightButton">
 		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default" onclick="switchMode()">Switch Mode</button>
 	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
@@ -140,7 +140,7 @@
 					<li><a href="./admin_users.html" class="btn active" role="button">Users</a></li>
 					<li><a href="./admin_events.html" class="btn" role="button">Events</a></li>
 					<li><a href="./admin_showcases.html" class="btn" role="button">Showcases</a></li>
-					<li><a href="./admin_showcases.html" class="btn" role="button">Subscribes</a></li>
+					<li><a href="admin_subscribes.html" class="btn" role="button">Subscribes</a></li>
 					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
 					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
 					
@@ -172,6 +172,7 @@
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
 		$('#pageNumber').data('offset',['']);
@@ -311,6 +312,19 @@
 			})
 		})
 	})
+
+	function switchMode(){
+		var logged = location.href;
+        var len = logged.length;
+        var start = logged.indexOf("=");
+        logged = logged.substring(start+1, len);
+        if(logged == "1"){
+			window.location.href = "http://localhost/isd_final/index.html" + "?logged=1";
+		}
+		else{
+			window.location.href = "http://localhost/isd_final/index.html"
+		}
+	}
 </script>
 	
 </body>

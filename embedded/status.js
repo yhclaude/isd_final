@@ -10,7 +10,7 @@ function Status() {
             var result = JSON.parse(data)['data'][0]['fields'];
             if (res.code == 200) {
                 document.getElementById('intro-title').innerHTML = "We're open now.";
-                document.getElementById('lbStatus').innerHTML = result.user_name + "is in open-lab, and the " + result.working_machine + "is working" ;
+                document.getElementById('lbStatus').innerHTML = result.user_name + " is in open-lab, and the " + result.working_machine + "is working" ;
             } else {
                 document.getElementById('intro-title').innerHTML = "We're close now.";
                 document.getElementById('lbStatus').innerHTML = "" ;
