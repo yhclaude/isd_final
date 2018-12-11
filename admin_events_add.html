@@ -87,46 +87,49 @@
 			<div class="col-md-3 left-navbar">
 				<ul class="left-navbar-menu">
 					<li><a href="#" class="btn" role="button">Users</a></li>
-					<li><a href="#" class="btn active" role="button">Events</a></li>
+					<li><a href="#" class="btn" role="button">Events</a></li>
 					<li><a href="#" class="btn" role="button">Video Links</a></li>
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
 					<li><a href="#" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn" role="button">Logs</a></li>
+					<li><a href="#" class="btn active" role="button">Logs</a></li>
 					
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Create New Event</div>
-				<form class="form-horizontal" type="" action="">
+				<div class="form-header">Create New logs</div>
+				<form class="form-horizontal">
 					<div class="form-group">
-						<label for="inputEventsName" class="col-sm-3 control-label">Name: </label>
+						<label for="inputName" class="col-sm-3 control-label">Name: </label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEventsName" placeholder="Enter event name please">
+							<input type="text" class="form-control" id="inputName" placeholder="Name" name="name">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputDate" class="col-sm-3 control-label">Date: </label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputDate" placeholder="Events date">
+							<input type="datetime-local" name="date" class="form-control" id="inputDate" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputType" class="col-sm-3 control-label">Type: </label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputType" placeholder="Type">
-						</div>
-					</div>
-                    <div class="form-group">
-						<label for="inputTopic" class="col-sm-3 control-label">Topic: </label>
-						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputTopic" placeholder="Your Topic">
+							<input type="text" class="form-control" id="inputType" placeholder="Type" name="type">
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="inputTopic" class="col-sm-3 control-label">Topic: </label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputTopic" placeholder="Topic" name="topic">
+						</div>
+					</div>
+					<div style="display: none">
+						<input name="sess" value="fwesdvge">
+					</div>
+					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -138,7 +141,50 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
 
+		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/events/?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var getParams = {
+				"fields": {
+					event_name: $("input[name='name']").val(),
+					event_date: $("input[name='date']").val(),
+					event_type: $("input[name='type']").val(),
+					event_topic: $("input[name='topic']").val()
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Add successfully!');
+						location.href = "http://localhost/isd_final/admin_log.html"
+					} else {
+						alert('Add failed!');
+					}
+				}
+			})
+		})
+
+	})
+</script>
 	
 </body>
 </html>

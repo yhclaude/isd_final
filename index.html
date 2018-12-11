@@ -60,7 +60,7 @@
               
     <div class="upperRightButton">
         <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
-        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default">Contact Us</button>
+        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="contactUs()" style="display:none;">Contact Us</button>
     </div>
     <div id="staffModal" class="modal fade" role="dialog">
             <div class="modal-dialog" role="document">
@@ -411,6 +411,8 @@
                     title.innerHTML = "<b>Hi, " + subcategorys.username + "!</b>"
                     var button = document.getElementById("subscribe");
                     button.innerHTML = "Update";
+                    button = document.getElementById("contact");
+                    button.innerHTML = "SwitchMode";
                     document.getElementById("logclose").click();
                 } else {
                     console.log('fail to load category');
