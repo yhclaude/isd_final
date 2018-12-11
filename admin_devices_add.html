@@ -113,12 +113,12 @@
 						</div>
                         <label for="inputAvailability" class="col-sm-3 control-label">Availability:</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputAvailability" name="isAvailabile">
+							<input type="checkbox" class="form-control" id="inputAvailability" name="isAvailable">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button id="submit" class="btn btn-primary">Confirm</button>
+							<button type="button" id="submit" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -141,16 +141,16 @@
 			return null;
 		}
 		var user_id = getQueryString("id");
- 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/logs/?api_key=keyHGiTKOgoyrrrm0';
+ 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/devices/?api_key=keyHGiTKOgoyrrrm0';
  		
  		$('#submit').click(function() {
 			var getParams = {
 				"fields": {
 					device_name: $("input[name='device_name']").val(),
-					device_isWorking: $("input[name='isWorking']").val(),
-					device_isAvailable: $("input[name='isAvailable']").val()
+					device_isWorking: 1,
+					device_isAvailable: 1
 				}
-			}
+			};
 			$.ajax({
 				url: url,
 				type: 'post',

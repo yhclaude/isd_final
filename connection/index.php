@@ -16,11 +16,13 @@ if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     return;
 } else if ($r['segs'][0] == 'logs' && count($r['segs'])==1 && $_SERVER['REQUEST_METHOD'] === "GET") {
     $r['queries']['sort'] = '&sort%5B0%5D%5Bfield%5D=log_id&sort%5B0%5D%5Bdirection%5D=desc';
+
 } else if ( $r['segs'][0]== 'announcement') {
     include_once('annoucement.php');
     $anno = new Announcement();
     echo $anno->homepage($r);
     exit;
+
 } else {
     // $decode = $user->decodeSess($r['queries']['sess']);
     // if (!isset($decode)) {

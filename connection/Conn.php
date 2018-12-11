@@ -76,6 +76,10 @@ class Conn
         if($result) {
             $res = ['code'=>200, 'data'=>json_decode($result)];
         }
+
+        if ($params['segs'][0] == 'subscribers') {
+            $this->sendMail(array($queries['subscriber_email'] => $queries['subscriber_name']));
+        }
         return json_encode($res);
     }
 
@@ -122,6 +126,29 @@ class Conn
             $url.=$queries['sort'];
         }
         return $url;
+    }
+
+    public function sendMail($to) {
+        require_once './vendor/autoload.php';
+
+        $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', '465', 'ssl')
+            ->setUsername(Configs::SERVER_MAIL_ACCOUNT)
+            ->setPassword(Configs::SERVER_MAIL_PASSWORD);
+
+            $mailer = Swift_Mailer::newInstance($transport);
+
+            $content = file_get_contents("./e-mail.html");
+            // $msg = str_replace('%USERLOGIN%', $message, $content);
+
+            $message_code = Swift_Message::newInstance("TEST", '', 'text/html', 'base64')
+            ->setFrom(array(Configs::SERVER_MAIL_FROM => Configs::SERVER_MAIL_FROM_NAME))
+            ->setSender(Configs::SERVER_MAIL_SEND, Configs::SERVER_MAIL_SEND_NAME)
+            ->setTo($to)
+            ->setCharset("utf-8")
+            ->setBody($content, 'text/html')
+            ->setReplyTo(Configs::SERVER_MAIL_REPLYTO, Configs::SERVER_MAIL_REPLYTO_NAME);
+
+            $result =  $mailer->send($message_code);
     }
 }
 
