@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
+
+		a:hover {
+			cursor: pointer;
+		}
 		
 		body.admin-body {
 			color: rgb(112, 112, 112);
@@ -22,7 +26,7 @@
 		}
 
 		.upperRightButton button, body.admin-body a.btn.active {
-			background-color: #1c2957;;
+			background-color: #1c2957;
 			color: rgb(224, 224, 224);
 			font-size: 16px;
 			padding: 4px 10px;
@@ -35,7 +39,7 @@
 			padding: 4px 10px;
 		}
 		li.page-item.active>a.page-link {
-			background-color: #1c2957;;
+			background-color: #1c2957;
 		}
 
 		.admin-page {
@@ -56,7 +60,7 @@
 		}
 
 		.admin-header > .addButton > a.btn {
-			background-color: rgb(24, 123, 119);
+			background-color: #1c2957;
 			color: rgb(224, 224, 224);
 		}
 
@@ -121,7 +125,7 @@
 <body class="admin-body">
 	<div class="upperRightButton">
 		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default" onclick="switchMode()">Switch Mode</button>
 	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
@@ -136,7 +140,7 @@
 					<li><a href="./admin_users.html" class="btn active" role="button">Users</a></li>
 					<li><a href="./admin_events.html" class="btn" role="button">Events</a></li>
 					<li><a href="./admin_showcases.html" class="btn" role="button">Showcases</a></li>
-					<li><a href="./admin_showcases.html" class="btn" role="button">Subscribes</a></li>
+					<li><a href="admin_subscribes.html" class="btn" role="button">Subscribes</a></li>
 					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
 					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
 					
@@ -168,6 +172,7 @@
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
 		$('#pageNumber').data('offset',['']);
@@ -211,7 +216,7 @@
 							$divStart = $('<div class="col-md-4">Email: </div>');
 							$divEnd = $('<div class="col-md-8"> </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
@@ -239,8 +244,8 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_users_edit.html?user_id='+res.data[i].id);
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_users_edit.html?id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -287,7 +292,39 @@
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/users', 'get');
 		});
+
+		$('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/users/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
 	})
+
+	function switchMode(){
+		var logged = location.href;
+        var len = logged.length;
+        var start = logged.indexOf("=");
+        logged = logged.substring(start+1, len);
+        if(logged == "1"){
+			window.location.href = "http://localhost/isd_final/index.html" + "?logged=1";
+		}
+		else{
+			window.location.href = "http://localhost/isd_final/index.html"
+		}
+	}
 </script>
 	
 </body>
