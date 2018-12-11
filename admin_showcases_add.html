@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
+	<title>Open Lab</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		
+		body.admin-body {
+			color: rgb(112, 112, 112);
+		}
+
+		.upperRightButton {
+			position: absolute;
+			right: 40px;
+			top: 20px;
+		}
+
+		.upperRightButton button, body.admin-body a.btn.active {
+			background-color: rgb(24, 123, 119);
+			color: rgb(224, 224, 224);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+
+		body.admin-body a.btn {
+			background-color: rgb(244, 244, 244);
+			color: rgb(112, 112, 112);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+		li.page-item.active>a.page-link {
+			background-color: rgb(24, 123, 119);
+		}
+
+		.admin-page {
+			margin-top: 50px;
+		}
+
+		.admin-page .admin-header {
+			margin-bottom: 10px;
+			font-weight: 700;
+			font-size: 22px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu {
+			border-right: 1px solid #e2e2e2;
+			padding: 0px 10px 10px 5px;
+		}
+	
+		.admin-content .left-navbar .left-navbar-menu li {
+			margin-bottom: 10px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu a {
+			width: 90%;
+			text-align: left;
+		}
+
+		.form-horizontal .control-label {
+			text-align: left;
+		}
+
+		.form-header {
+			font-size: 18px;
+			font-weight: 700;
+			margin: 10px 0;
+		}
+
+	</style>
+</head>
+<body class="admin-body">
+	<div class="upperRightButton">
+		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+	</div>
+	<div class="admin-page container">
+		<div class="admin-header">
+			Content Management
+		</div>
+		<div class="row admin-content">
+			<div class="col-md-3 left-navbar">
+				<ul class="left-navbar-menu">
+					<li><a href="#" class="btn" role="button">Users</a></li>
+					<li><a href="#" class="btn" role="button">Events</a></li>
+					<li><a href="#" class="btn" role="button">Video Links</a></li>
+					<li><a href="#" class="btn active" role="button">Showcases</a></li>
+					<li><a href="#" class="btn" role="button">Appointments</a></li>
+					<li><a href="#" class="btn" role="button">Subscribes</a></li>
+					<li><a href="#" class="btn" role="button">Devices</a></li>
+					<li><a href="#" class="btn" role="button">Logs</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-md-9 right-content">
+				<div class="form-header">Create New Showcase</div>
+				<form class="form-horizontal" type="" action="">
+					<div class="form-group">
+						<label for="inputShowcaseName" class="col-sm-3 control-label">Title</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputShowcaseName" placeholder="Enter showcases title please">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputAuthor" class="col-sm-3 control-label">Author</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputAuthor" placeholder="Author name">
+						</div>
+					</div>
+                    <div class="form-group">
+						<label for="inputShowcaseTime" class="col-sm-3 control-label">Time</label>
+						<div class="col-sm-9">
+							<input type="datetime-local" class="form-control" id="inputShowcaseTime" placeholder="Time">
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<label for="inputDescription" class="col-sm-3 control-label">Description</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputDescription" placeholder="Descripbe your showcase">
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<label for="inputURL" class="col-sm-3 control-label">URL</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputURL" placeholder="Update your url">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-primary">Confirm</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+			
+	</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-en-US.js"></script>
+
+	
+</body>
+</html>

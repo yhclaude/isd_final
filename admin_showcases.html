@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
+        a:hover {
+			cursor: pointer;
+		}
 		
 		body.admin-body {
 			color: rgb(112, 112, 112);
@@ -46,8 +49,19 @@
 			margin-bottom: 10px;
 			font-weight: 700;
 			font-size: 22px;
+			position: relative;
 		}
 
+		.admin-header > .addButton {
+			position: absolute;
+			right: 35px;
+			top: 5px;
+		}
+
+		.admin-header > .addButton > a.btn {
+			background-color: rgb(24, 123, 119);
+			color: rgb(224, 224, 224);
+		}
 		.admin-content .left-navbar .left-navbar-menu {
 			border-right: 1px solid #e2e2e2;
 			padding: 0px 10px 10px 5px;
@@ -114,6 +128,9 @@
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
+            <div class="addButton">
+				<a href="admin_showcases_add.html" type="button" class="btn btn-default">Create Showcase</a>
+			</div>
 		</div>
 		<div class="row admin-content">
 			<div class="col-md-3 left-navbar">
@@ -196,7 +213,7 @@
 							$divStart = $('<div class="col-md-4">Time: </div>');
 							$divEnd = $('<div class="col-md-8">Description: </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
@@ -224,8 +241,8 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_showcases_edit.html?user_id='+res.data[i].id);
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_showcases_edit.html?id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -272,6 +289,25 @@
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/showcases', 'get');
 		});
+        
+        $('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/showcases/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
 	})
 </script>
 	

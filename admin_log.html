@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
+		a:hover {
+			cursor: pointer;
+		}
 		
 		body.admin-body {
 			color: rgb(112, 112, 112);
@@ -197,7 +200,6 @@
 					<li><a href="./admin_showcases.html" class="btn" role="button">Subscribes</a></li>
 					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
 					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
-					
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
@@ -223,8 +225,6 @@
 	</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.min.js"></script>
-<script src="js/bootstrap-table-en-US.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -262,14 +262,14 @@
 							$div1 = $('<div class="row"></div>');
 							$div2 = $('<div class="row"></div>');
 							$div3 = $('<div class="function-div"></div>');
-							$divName = $('<div class="col-md-4">Name: </div>');
-							$divWork = $('<div class="col-md-7">Work: </div>');
+							$divName = $('<div class="col-md-5">Name: </div>');
+							$divWork = $('<div class="col-md-6">Work: </div>');
 							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
 							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
-							$divStart = $('<div class="col-md-4">Start Time: </div>');
-							$divEnd = $('<div class="col-md-8">End Time: </div>');
+							$divStart = $('<div class="col-md-5">Start Time: </div>');
+							$divEnd = $('<div class="col-md-7">End Time: </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
@@ -277,19 +277,19 @@
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
 							// name 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-5').append('<span>' + res.data[i].fields.user_name + '</span>');
 
 							// working_machine
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-6').append('<span>' + res.data[i].fields.working_machine + '</span>');
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
 
 							// start_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-5').append('<span>' + res.data[i].fields.start_time + '</span>');
 
 							// end_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-7').append('<span>' + res.data[i].fields.end_time + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
@@ -297,8 +297,8 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_log_edit.html?user_id='+res.data[i].id);
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href', 'admin_log_edit.html?id=' + res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -322,6 +322,7 @@
 								e.stopPropagation();
 							})
 						})
+
 					} 
 					else {
 						var val = parseInt($('#pageNumber').html()) - 1;
@@ -339,12 +340,32 @@
 		$('.page-next a').click(function() {
 			changePage(1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
+
 		$('.page-next a').click();
 
 
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
+
+		$('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/logs/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
 	})
 </script>
 	

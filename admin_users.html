@@ -46,6 +46,18 @@
 			margin-bottom: 10px;
 			font-weight: 700;
 			font-size: 22px;
+			position: relative;
+		}
+
+		.admin-header > .addButton {
+			position: absolute;
+			right: 35px;
+			top: 5px;
+		}
+
+		.admin-header > .addButton > a.btn {
+			background-color: rgb(24, 123, 119);
+			color: rgb(224, 224, 224);
 		}
 
 		.admin-content .left-navbar .left-navbar-menu {
@@ -114,6 +126,9 @@
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
+            <div class="addButton">
+				<a href="admin_users_add.html" type="button" class="btn btn-default">Create User</a>
+			</div>
 		</div>
 		<div class="row admin-content">
 			<div class="col-md-3 left-navbar">
