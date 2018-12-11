@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
-		
+		a:hover {
+			cursor: pointer;
+		}
 		body.admin-body {
 			color: rgb(112, 112, 112);
 		}
@@ -213,7 +215,7 @@
 							$divStart = $('<div class="col-md-4">Working: </div>');
 							$divEnd = $('<div class="col-md-8">Available: </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
