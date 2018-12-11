@@ -7,11 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
     <title>Open Lab</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/index3.css" rel="stylesheet">
     <style>
+        .open_lab_content li{
+            list-style: none;
+            font-size: 16px;
+            padding: 15px;
+            width: 100%;
+            border: 0px;
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 15px;
+            position: relative;
+        }
+        hr{
+            width: 95%;
+            size: 1px;
+        }
+        .link {
+            text-align: right;
+            padding-right: 20px;
+            position: relative;
+        }
+        .title {
+            font-size: 20px;
+            padding-left: 20px;
+        }
+        .content {
+            font-size: 16px;
+            padding-left: 20px;
+            font-weight: 900;
+        }
     </style>
 </head>
 
@@ -97,29 +126,79 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="open_lab">
                             <div>
-                                <div class="open_lab_title">
+                                <div id="streaming_title" class="open_lab_title">
                                     Now We are streaming
                                 </div>
                                 <div class="open_lab_content">
-                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/[INSERT_ID]?autoplay=1&origin=http://example.com" frameborder="0"></iframe>
+                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/" frameborder="0"></iframe>
                                 </div>
                             </div>
                             <div>
                                 <div class="open_lab_title">
                                     Announcement
                                 </div>
-                                <div class="open_lab_content">
-                                    <img src="images/calendar.png" />
-                                </div>
-                                <div class="open_lab_content">
-                                    <img src="images/calendar.png" />
+                                <div class="open_lab_content announcement_tab">
+                                    <li>
+                                        <div class="row">
+                                            <div class="title">Name: </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="content">  Test: ABC</div>
+                                            <div class="link">
+                                                <a href="#detailModel" data-toggle="modal">more </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="line">
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                Test Content.
+                                            </div>
+                                            <div class="col-md-4">
+                                                Name: 
+                                            </div>
+                                            <div class="link">
+                                                <a href="">Register </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="title">Name: </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="content">  Test: ABC</div>
+                                            <div class="link">
+                                                <a href="#detailModel" data-toggle="modal">more </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="line">
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                Test Content.
+                                            </div>
+                                            <div class="col-md-4">
+                                                Name: 
+                                            </div>
+                                            <div class="link">
+                                                <a href="">Register </a>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </div>
                             </div>
 
                         </div>
                         <div role="tabpanel" class="tab-pane" id="showcase">
                             <div class="row showcaseDiv">
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="showcase_img">
                                         <img src="images/showcase4.png" />
                                     </div>
@@ -146,7 +225,10 @@
                                     <div class="showcase_img">
                                         <img src="images/showcase2.png" />
                                     </div>
-                                </div>
+                                </div> -->
+
+                                <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>                         
+
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="schedule">
@@ -247,15 +329,66 @@
             </div>
         </div>
     </div>
-
+    
 
 </body>
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
 <script src="js/user.js"></script>
 <script>
     $(function () {
         $("#footer").load("./template/footer.html");
+        $.ajax({
+            url: 'http://localhost/isd_final/connection/index.php/announcement/homepage',
+            type: 'get',
+            data: {
+                sess: '13123'
+            },
+            dataType:'json',
+            
+            success: function(res) {
+                if(res.data.streaming.video_id){
+                    var iframeSrc = $('#ytplayer').attr("src") + res.data.streaming.video_id + '?autoplay=1&origin=http://example.com';
+                    $('#ytplayer').attr("src", iframeSrc);
+                } else {
+                    $('#ytplayer').css("display","none");
+                    $('#streaming_title').html("Now no streaming");    
+                }
+
+                $.each(res.data.announcement,function(i) {
+                    $('.announcement_tab').append('<li> \
+                        <div class="row"> \
+                            <div class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="content">' + res.data.announcement[i].fields.event_description + '</div> \
+                            <div class="link"> \
+                                <a href="">more </a> \
+                            </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="line"> \
+                                <hr/> \
+                            </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_topic + ' \
+                            </div> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_type + '  \
+                            </div> \
+                            <div class="link"> \
+                                <a href="">Register</a> \
+                            </div> \
+                        </div> \
+                    </li>');
+                })
+
+                    
+
+
+            }
+        })
     });
 
     function login() {

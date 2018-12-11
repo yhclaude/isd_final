@@ -99,26 +99,26 @@
 			</div>
 			<div class="col-md-9 right-content">
 				<div class="form-header">Create New Device</div>
-				<form class="form-horizontal" type="" action="">
+				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputDevicename" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputDevicenname" placeholder="Enter your device name please">
+							<input type="text" class="form-control" id="inputDevicenname" name="device_name" placeholder="Enter your device name please">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputWorking" class="col-sm-3 control-label">Working</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputWorking">
+							<input type="checkbox" class="form-control" id="inputWorking" name="isWorking">
 						</div>
                         <label for="inputAvailability" class="col-sm-3 control-label">Availability:</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputAvailability">
+							<input type="checkbox" class="form-control" id="inputAvailability" name="isAvailabile">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary">Confirm</button>
+							<button id="submit" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -130,7 +130,44 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+ 		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+		var user_id = getQueryString("id");
+ 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/logs/?api_key=keyHGiTKOgoyrrrm0';
+ 		
+ 		$('#submit').click(function() {
+			var getParams = {
+				"fields": {
+					device_name: $("input[name='device_name']").val(),
+					device_isWorking: $("input[name='isWorking']").val(),
+					device_isAvailable: $("input[name='isAvailable']").val()
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Add successfully!');
+						location.href = "http://localhost/isd_final/admin_devices.html"
+					} else {
+						alert('Add failed!');
+					}
+				}
+			})
+		})
+ 	})
+</script>
 	
 </body>
 </html>
