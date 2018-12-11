@@ -89,39 +89,47 @@
 					<li><a href="#" class="btn" role="button">Users</a></li>
 					<li><a href="#" class="btn" role="button">Events</a></li>
 					<li><a href="#" class="btn" role="button">Video Links</a></li>
-					<li><a href="#" class="btn" role="button">Showcases</a></li>
+					<li><a href="#" class="btn active" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
 					<li><a href="#" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn active" role="button">Logs</a></li>
+					<li><a href="#" class="btn" role="button">Logs</a></li>
 					
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Edit Events</div>
+				<div class="form-header">Create New Showcase</div>
 				<form class="form-horizontal" type="" action="">
 					<div class="form-group">
-						<label for="inputEventsName" class="col-sm-3 control-label">Name: </label>
+						<label for="inputShowcaseName" class="col-sm-3 control-label">Title</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEventsName" placeholder="Enter event name please">
+							<input type="text" class="form-control" id="inputShowcaseName" placeholder="Enter showcases title please">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputDate" class="col-sm-3 control-label">Date: </label>
+						<label for="inputAuthor" class="col-sm-3 control-label">Author</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputDate" placeholder="Events date">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputType" class="col-sm-3 control-label">Type: </label>
-						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputType" placeholder="Type">
+							<input type="text" class="form-control" id="inputAuthor" placeholder="Author name">
 						</div>
 					</div>
                     <div class="form-group">
-						<label for="inputTopic" class="col-sm-3 control-label">Topic: </label>
+						<label for="inputShowcaseTime" class="col-sm-3 control-label">Time</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputTopic" placeholder="Your Topic">
+							<input type="datetime-local" class="form-control" id="inputShowcaseTime" placeholder="Time">
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<label for="inputDescription" class="col-sm-3 control-label">Description</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputDescription" placeholder="Descripbe your showcase">
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<label for="inputURL" class="col-sm-3 control-label">URL</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputURL" placeholder="Update your url">
 						</div>
 					</div>
 					<div class="form-group">
@@ -138,22 +146,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
 
-		function getQueryString(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-			var r = window.location.search.substr(1).match(reg);
-			if (r != null) {
-				return unescape(r[2]);
-			}
-			return null;
-		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
-	})
-</script>
 	
 </body>
 </html>

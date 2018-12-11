@@ -87,18 +87,18 @@
 			<div class="col-md-3 left-navbar">
 				<ul class="left-navbar-menu">
 					<li><a href="#" class="btn" role="button">Users</a></li>
-					<li><a href="#" class="btn" role="button">Events</a></li>
+					<li><a href="#" class="btn active" role="button">Events</a></li>
 					<li><a href="#" class="btn" role="button">Video Links</a></li>
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
 					<li><a href="#" class="btn" role="button">Subscribes</a></li>
 					<li><a href="#" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn active" role="button">Logs</a></li>
+					<li><a href="#" class="btn" role="button">Logs</a></li>
 					
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Edit Events</div>
+				<div class="form-header">Create New Event</div>
 				<form class="form-horizontal" type="" action="">
 					<div class="form-group">
 						<label for="inputEventsName" class="col-sm-3 control-label">Name: </label>
@@ -138,22 +138,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
 
-		function getQueryString(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-			var r = window.location.search.substr(1).match(reg);
-			if (r != null) {
-				return unescape(r[2]);
-			}
-			return null;
-		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
-	})
-</script>
 	
 </body>
 </html>
