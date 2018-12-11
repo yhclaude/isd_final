@@ -38,8 +38,6 @@ class Conn
         $id = $params['id'];
         unset($queries['id']);
         $data_string = json_encode($data);
-        // echo $data_string;
-        // exit;
         $url = $this->getUrl($params);
         $ch = curl_init($url);
 
