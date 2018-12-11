@@ -98,22 +98,22 @@
 			</div>
 			<div class="col-md-9 right-content">
 				<div class="form-header">Create New User</div>
-				<form class="form-horizontal" type="" action="">
+				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputUsername" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputUsername" placeholder="Enter your name please">
+							<input type="text" class="form-control" id="inputUsername" placeholder="Enter your name please" name="username">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEmail" placeholder="Your e-mail">
+							<input type="text" class="form-control" id="inputEmail" placeholder="Your e-mail" name="account">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary" style="background-color: #1c2957;">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary" style="background-color: #1c2957;">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -125,7 +125,43 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+ 		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+		var user_id = getQueryString("id");
+ 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/users/?api_key=keyHGiTKOgoyrrrm0';
+ 		
+ 		$('#submit').click(function() {
+			var getParams = {
+				"fields": {
+					username: $("input[name='username']").val(),
+					account: $("input[name='account']").val()
+				}
+			};
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Add successfully!');
+						location.href = "http://localhost/isd_final/admin_users.html"
+					} else {
+						alert('Add failed!');
+					}
+				}
+			})
+		})
+ 	})
+</script>
 	
 </body>
 </html>

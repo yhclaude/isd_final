@@ -97,43 +97,43 @@
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Edit Showcases</div>
-				<form class="form-horizontal" type="" action="">
+				<div class="form-header">Create New Showcase</div>
+				<form class="form-horizontal">
 					<div class="form-group">
-						<label for="inputShowcaseName" class="col-sm-3 control-label">Title</label>
+						<label for="inputTitle" class="col-sm-3 control-label">Title</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputShowcaseName" placeholder="Enter showcases title please">
+							<input type="text" class="form-control" id="inputTitle" placeholder="Enter showcases title please" name="showcase_title">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputAuthor" class="col-sm-3 control-label">Author</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputAuthor" placeholder="Author name">
+							<input type="text" class="form-control" id="inputAuthor" placeholder="Author name" name="showcase_author">
 						</div>
 					</div>
                     <div class="form-group">
 						<label for="inputShowcaseTime" class="col-sm-3 control-label">Time</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputShowcaseTime" placeholder="Time">
+							<input type="date" class="form-control" id="inputShowcaseTime" placeholder="Time" name="showcase_time">
 						</div>
 					</div>
                     
                     <div class="form-group">
 						<label for="inputDescription" class="col-sm-3 control-label">Description</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputDescription" placeholder="Descripbe your showcase">
+							<input type="text" class="form-control" id="inputDescription" placeholder="Descripbe your showcase" name="showcase_description">
 						</div>
 					</div>
                     
                     <div class="form-group">
 						<label for="inputURL" class="col-sm-3 control-label">URL</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputURL" placeholder="Update your url">
+							<input type="text" class="form-control" id="inputURL" placeholder="Update your url" name="showcase_url">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -156,9 +156,38 @@
 			}
 			return null;
 		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/showcases/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var getParams = {
+				"fields": {
+					showcase_title: $("input[name='showcase_title']").val(),
+					showcase_author: $("input[name='showcase_author']").val(),
+					showcase_time: $("input[name='showcase_time']").val(),
+					showcase_description: $("input[name='showcase_description']").val(),
+					showcase_imageurl: $("input[name='showcase_url']").val()
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Edit successfully!');
+						location.href = "http://localhost/isd_final/admin_showcases.html"
+					} else {
+						alert('Edit failed!');
+					}
+				}
+			})
+		})
+
 	})
 </script>
 	

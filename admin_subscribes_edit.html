@@ -97,35 +97,40 @@
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Edit Subscription</div>
-				<form class="form-horizontal" type="" action="">
+				<div class="form-header">Create Subscription</div>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="inputName" class="col-sm-3 control-label">Your name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputName" placeholder="Your name" name="subscriber_name">
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEmail" placeholder="Enter your e-mail please">
+							<input type="text" class="form-control" id="inputEmail" placeholder="Your E-mail" name="subscriber_email">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputPreference" class="col-sm-3 control-label">Preference</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputPreference" placeholder="Your preference">
+							<input type="text" class="form-control" id="inputPreference" placeholder="Your preference" name="subscriber_preference">
 						</div>
 					</div>
-					<div class="form-group">
+                    <div class="form-group">
 						<label for="inputActive" class="col-sm-3 control-label">Active</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputActive" placeholder="End Time">
+							<input type="checkbox" class="form-control" id="inputActive" placeholder="Active" name="subscriber_isActive">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
 						</div>
 					</div>
 				</form>
 			</div>
-		</div>
-			
+		</div>		
 	</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -142,9 +147,41 @@
 			}
 			return null;
 		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/subscribers/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var subscriber_isActive = "";
+ 			if($("input[name='subscriber_isActive']").prop("checked")) {
+ 				subscriber_isActive = 1;
+ 			}
+			var getParams = {
+				"fields": {
+					subscriber_name: $("input[name='subscriber_name']").val(),
+					subscriber_email: $("input[name='subscriber_email']").val(),
+					subscriber_preference: $("input[name='subscriber_preference']").val(),
+					subscriber_isActive: subscriber_isActive
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Edit successfully!');
+						location.href = "http://localhost/isd_final/admin_subscribes.html"
+					} else {
+						alert('Edit failed!');
+					}
+				}
+			})
+		})
+
 	})
 </script>
 	
