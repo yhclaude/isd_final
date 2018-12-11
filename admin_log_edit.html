@@ -99,28 +99,37 @@
 			</div>
 			<div class="col-md-9 right-content">
 				<div class="form-header">Edit logs</div>
-				<form class="form-horizontal" type="" action="">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="inputUsername" class="col-sm-3 control-label">User Name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputUsername" placeholder="User Name" name="user_name">
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="inputWorkingMachine" class="col-sm-3 control-label">Working Machine</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputWorkingMachine" placeholder="Working Machine">
+							<input type="text" class="form-control" id="inputWorkingMachine" placeholder="Working Machine" name="working_machine">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputStartTime" class="col-sm-3 control-label">Start Time</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputStartTime" placeholder="Start Time">
+							<input type="datetime-local" name="start_time" class="form-control" id="inputStartTime" placeholder="Start Time">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEndTime" class="col-sm-3 control-label">End Time</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputEndTime" placeholder="End Time">
+							<input type="datetime-local" name="end_time" class="form-control" id="inputEndTime" placeholder="End Time">
 						</div>
+					</div>
+					<div style="display: none">
+						<input name="sess" value="fwesdvge">
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -143,9 +152,37 @@
 			}
 			return null;
 		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/logs/'+ user_id +'?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var getParams = {
+				"fields": {
+					user_name: $("input[name='user_name']").val(),
+					working_machine: $("input[name='working_machine']").val(),
+					start_time: $("input[name='start_time']").val(),
+					end_time: $("input[name='end_time']").val()
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Edit successfully!');
+						location.href = "http://localhost/isd_final/admin_log.html"
+					} else {
+						alert('Edit failed!');
+					}
+				}
+			})
+		})
+
 	})
 </script>
 	

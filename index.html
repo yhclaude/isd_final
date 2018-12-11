@@ -7,19 +7,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
     <title>Open Lab</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="css/index3.css" rel="stylesheet">
     <style>
+        .open_lab_content li{
+            list-style: none;
+            font-size: 16px;
+            padding: 15px;
+            width: 100%;
+            border: 0px;
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 15px;
+            position: relative;
+        }
+        hr{
+            width: 95%;
+            size: 1px;
+        }
+        .link {
+            text-align: right;
+            padding-right: 20px;
+            position: relative;
+        }
+        .title {
+            font-size: 20px;
+            padding-left: 20px;
+        }
+        .content {
+            font-size: 16px;
+            padding-left: 20px;
+            font-weight: 900;
+        }
     </style>
 </head>
 
 <body>
     <div class="upperRightButton">
-        <button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Subscribe</button>
+        <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
         <button data-toggle="modal" data-target="#" type="button" class="btn btn-default">Contact Us</button>
     </div>
+    <div id="staffModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+                    <div class="modal-header-close" style="padding:3%">
+                        <button type="button" id="logclose" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
+                                <br /><br />
+                            </div>
+                            <div class="form-group">
+                                <label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+                                <br />
+                                <span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
+                                    <input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
+                                        placeholder="13:00 -- 17:00">
+                                </span>
+                            </div>
+                            <br /><br />
+                            <div class="form-group">
+                                <span>
+                                    <label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+                                    <!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+                                </span>
+                                <br />
+   
+                                <span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+                                    <select style="width: 75%">
+                                        <option value="1">3D Printing</option>
+                                        <option value="2">Virtual Reality</option>
+                                        <option value="3">O</option>
+                                        <option value="4">A</option>
+                                    </select>
+                                </span>                            
+                            </div>
+                            <br /><br />
+                        <div class="form-group">
+                            <label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+                            <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+                                <textarea class="form-control" rows="6" cols="80" name="current event" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
+                                <button type="button" class="btn btn-default" style="color: white;background-color: rgb(24, 123, 119);">Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
     <div class="container">
         <div class="row">
             <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
@@ -41,29 +126,79 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="open_lab">
                             <div>
-                                <div class="open_lab_title">
+                                <div id="streaming_title" class="open_lab_title">
                                     Now We are streaming
                                 </div>
                                 <div class="open_lab_content">
-                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/[INSERT_ID]?autoplay=1&origin=http://example.com" frameborder="0"></iframe>
+                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/" frameborder="0"></iframe>
                                 </div>
                             </div>
                             <div>
                                 <div class="open_lab_title">
                                     Announcement
                                 </div>
-                                <div class="open_lab_content">
-                                    <img src="images/calendar.png" />
-                                </div>
-                                <div class="open_lab_content">
-                                    <img src="images/calendar.png" />
+                                <div class="open_lab_content announcement_tab">
+                                    <li>
+                                        <div class="row">
+                                            <div class="title">Name: </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="content">  Test: ABC</div>
+                                            <div class="link">
+                                                <a href="#detailModel" data-toggle="modal">more </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="line">
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                Test Content.
+                                            </div>
+                                            <div class="col-md-4">
+                                                Name: 
+                                            </div>
+                                            <div class="link">
+                                                <a href="">Register </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="title">Name: </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="content">  Test: ABC</div>
+                                            <div class="link">
+                                                <a href="#detailModel" data-toggle="modal">more </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="line">
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                Test Content.
+                                            </div>
+                                            <div class="col-md-4">
+                                                Name: 
+                                            </div>
+                                            <div class="link">
+                                                <a href="">Register </a>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </div>
                             </div>
 
                         </div>
                         <div role="tabpanel" class="tab-pane" id="showcase">
                             <div class="row showcaseDiv">
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="showcase_img">
                                         <img src="images/showcase4.png" />
                                     </div>
@@ -90,7 +225,10 @@
                                     <div class="showcase_img">
                                         <img src="images/showcase2.png" />
                                     </div>
-                                </div>
+                                </div> -->
+
+                                <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>                         
+
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="schedule">
@@ -108,7 +246,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
                 <div class="modal-header-close">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+                    <button type="button" class="close" id="subclose" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -119,30 +257,34 @@
                             <br />
                         </div>
                         <div class="form-group">
+                            <label for="name" style="color: white; font-size: 16px;">name</label>
+                            <input type="text" class="form-control" id="subsname">
+                        </div>
+                        <div class="form-group">
                             <label for="email" style="color: white; font-size: 16px;">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="abc@pitt.edu">
+                            <input type="text" class="form-control" id="email">
                         </div>
                         <div class="form-group">
                             <label for="interest topic" style="color: white; font-size: 16px;">Tell us what you're
                                 interested in</label>
                             <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">Virtual Reality</label>
+                                    <label><input type="checkbox" value="VirtualReality" name = "check">Virtual Reality</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">3D printing</label>
+                                    <label><input type="checkbox" value="3Dprinting" name = "check">3D printing</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">360° Video Camera & Viewer</label>
+                                    <label><input type="checkbox" name = "check" value="360°VideoCamera&Viewer" >360° Video Camera & Viewer</label>
                                 </div>
                                 <div class="checkbox">
-                                    <label><input type="checkbox" value="">360° Video Projector</label>
+                                    <label><input type="checkbox" name = "check" value="360°VideoProjector">360° Video Projector</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
-                                <button type="button" class="btn btn-default">Subscribe</button>
+                                <button type="button" class="btn btn-default" onclick="subscribeSend()">Subscribe</button>
                             </div>
                         </div>
                     </form>
@@ -187,20 +329,100 @@
             </div>
         </div>
     </div>
-
+    
 
 </body>
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
 <script src="js/user.js"></script>
 <script>
     $(function () {
         $("#footer").load("./template/footer.html");
+        $.ajax({
+            url: 'http://localhost/isd_final/connection/index.php/announcement/homepage',
+            type: 'get',
+            data: {
+                sess: '13123'
+            },
+            dataType:'json',
+            
+            success: function(res) {
+                if(res.data.streaming.video_id){
+                    var iframeSrc = $('#ytplayer').attr("src") + res.data.streaming.video_id + '?autoplay=1&origin=http://example.com';
+                    $('#ytplayer').attr("src", iframeSrc);
+                } else {
+                    $('#ytplayer').css("display","none");
+                    $('#streaming_title').html("Now no streaming");    
+                }
+
+                $.each(res.data.announcement,function(i) {
+                    $('.announcement_tab').append('<li> \
+                        <div class="row"> \
+                            <div class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="content">' + res.data.announcement[i].fields.event_description + '</div> \
+                            <div class="link"> \
+                                <a href="">more </a> \
+                            </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="line"> \
+                                <hr/> \
+                            </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_topic + ' \
+                            </div> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_type + '  \
+                            </div> \
+                            <div class="link"> \
+                                <a href="">Register</a> \
+                            </div> \
+                        </div> \
+                    </li>');
+                })
+
+                    
+
+
+            }
+        })
     });
 
     function login() {
         console.log("./connection/index.php/users/login?account=" + $("#inputName").text + "&password=" + $(
             "#inputPassword").text);
+
+        var username = document.getElementById("inputName").value;
+        var password = document.getElementById("inputPassword").value
+        var url = "./connection/index.php/users/login";
+        console.log(localStorage.getItem("code"));
+        var param = {
+            "account": username,
+            "password": password,
+        };
+        var saveData = $.ajax({
+            type: "GET",
+            url: url,
+            data: param,
+            dataType: "JSON",
+            success: function(resultData){    
+                console.log(resultData);
+                var res = resultData;
+                if (res.code == 200) {
+                    subcategorys = res.data;
+                    var button = document.getElementById("subscribe");
+                    button.innerHTML = "Update";
+                    document.getElementById("logclose").click();
+                } else {
+                    console.log('fail to load category');
+                    alert('Failed to load sub-categories');
+                }       
+            }
+        });
+        saveData.error(function(e) { alert("Something went wrong: "+e); });
         // $.ajax({
         //     url: "./connection/index.php/users/login?account="+$("#inputName").text+"&password="$("#inputPassword").text
         //   }).done(function(data) {
@@ -213,6 +435,62 @@
         //            alert('Failed to load sub-categories');
         //        }
         //   });
+    }
+
+    function subClick(){
+        var button = document.getElementById("subscribe");
+        if(button.value == "Subscribe"){
+
+        }
+        $("#subscribeModal").modal("toggle");
+        alert(button.innerHTML);
+    }
+
+    function subscribeSend(){
+        var url = "http://localhost/isd_final/connection/index.php/subscribers";
+
+        var name = document.getElementById("subsname").value;
+        var email = document.getElementById("email").value;
+        var cbox = document.getElementsByName("check");
+        var pref = "";
+        var bpref = "";
+        for(var i = 0; i < cbox.length; i++){
+            if(cbox[i].checked == true){
+                pref = pref + cbox[i].value;
+            }
+        }
+
+        /*
+        var param = {
+                "subscriber_name": "Eden",
+                "subscriber_email": "tat73@pitt.edu",
+                "subscriber_preference": "123456",
+        };
+        */
+        var param = {
+            "subscriber_name": name,
+            "subscriber_email": email,
+            "subscriber_preference": pref,
+        };
+        console.log(param);
+        var saveData = $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: JSON.stringify(param),
+                  dataType: "text",
+                  success: function(resultData) {
+                    var res = JSON.parse(data);
+                    if (res.code == 200) {
+                        subcategorys = res.data;
+                        console.log(resultData);
+                    }
+                    else {
+                    console.log('fail to load category');
+                    alert('Failed to load sub-categories');
+                    }       
+                  }
+            });
+            saveData.error(function(e) { alert("Something went wrong: "+e); });
     }
 </script>
 

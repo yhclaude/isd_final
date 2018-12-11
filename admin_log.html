@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
+		a:hover {
+			cursor: pointer;
+		}
 		
 		body.admin-body {
 			color: rgb(112, 112, 112);
@@ -121,9 +124,66 @@
 </head>
 <body class="admin-body">
 	<div class="upperRightButton">
-		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#" type="button" class="btn btn-default">Switch Mode</button>
 	</div>
+
+    <div id="staffModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+					<div class="modal-header-close" style="padding:3%">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+						<form role="form">
+							<div class="form-group">
+								<label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
+								<br /><br />
+							</div>
+							<div class="form-group">
+								<label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+								<br />
+								<span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
+									<input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
+										placeholder="13:00 -- 17:00">
+								</span>
+							</div>
+							<br /><br />
+							<div class="form-group">
+								<span>
+									<label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+								</span>
+								<br />
+   
+								<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+									<select style="width: 75%">
+										<option value="1">3D Printing</option>
+										<option value="2">Virtual Reality</option>
+										<option value="3">O</option>
+										<option value="4">A</option>
+									</select>
+								</span>                            
+							</div>
+							<br /><br />
+						<div class="form-group">
+							<label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+							<div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+								<textarea class="form-control" rows="6" cols="80" name="current event" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
+								<button type="button" class="btn btn-default" style="color: white;background-color: rgb(24, 123, 119);">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>	
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
@@ -168,8 +228,6 @@
 	</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.min.js"></script>
-<script src="js/bootstrap-table-en-US.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -207,14 +265,14 @@
 							$div1 = $('<div class="row"></div>');
 							$div2 = $('<div class="row"></div>');
 							$div3 = $('<div class="function-div"></div>');
-							$divName = $('<div class="col-md-4">Name: </div>');
-							$divWork = $('<div class="col-md-7">Work: </div>');
+							$divName = $('<div class="col-md-5">Name: </div>');
+							$divWork = $('<div class="col-md-6">Work: </div>');
 							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
 							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
-							$divStart = $('<div class="col-md-4">Start Time: </div>');
-							$divEnd = $('<div class="col-md-8">End Time: </div>');
+							$divStart = $('<div class="col-md-5">Start Time: </div>');
+							$divEnd = $('<div class="col-md-7">End Time: </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
@@ -222,19 +280,19 @@
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
 							// name 
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.user_name + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-5').append('<span>' + res.data[i].fields.user_name + '</span>');
 
 							// working_machine
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.working_machine + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-6').append('<span>' + res.data[i].fields.working_machine + '</span>');
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
 
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
 
 							// start_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.start_time + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-5').append('<span>' + res.data[i].fields.start_time + '</span>');
 
 							// end_time
-							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + res.data[i].fields.end_time + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-7').append('<span>' + res.data[i].fields.end_time + '</span>');
 
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
 							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
@@ -242,8 +300,8 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_log_edit.html?user_id='+res.data[i].id);
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href', 'admin_log_edit.html?id=' + res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -267,6 +325,7 @@
 								e.stopPropagation();
 							})
 						})
+
 					} 
 					else {
 						var val = parseInt($('#pageNumber').html()) - 1;
@@ -284,12 +343,32 @@
 		$('.page-next a').click(function() {
 			changePage(1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
+
 		$('.page-next a').click();
 
 
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/logs', 'get');
 		});
+
+		$('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/logs/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
 	})
 </script>
 	
