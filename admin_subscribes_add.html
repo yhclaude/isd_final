@@ -91,37 +91,37 @@
 					<li><a href="#" class="btn" role="button">Video Links</a></li>
 					<li><a href="#" class="btn" role="button">Showcases</a></li>
 					<li><a href="#" class="btn" role="button">Appointments</a></li>
-					<li><a href="#" class="btn" role="button">Subscribes</a></li>
+					<li><a href="#" class="btn active" role="button">Subscribes</a></li>
 					<li><a href="#" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn active" role="button">Logs</a></li>
+					<li><a href="#" class="btn" role="button">Logs</a></li>
 					
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Edit Events</div>
+				<div class="form-header">Create Subscription</div>
 				<form class="form-horizontal" type="" action="">
 					<div class="form-group">
-						<label for="inputEventsName" class="col-sm-3 control-label">Name: </label>
+						<label for="inputName" class="col-sm-3 control-label">Your name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEventsName" placeholder="Enter event name please">
+							<input type="text" class="form-control" id="inputName" placeholder="Your name">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputDate" class="col-sm-3 control-label">Date: </label>
+						<label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputDate" placeholder="Events date">
+							<input type="text" class="form-control" id="inputEmail" placeholder="Your E-mail">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputType" class="col-sm-3 control-label">Type: </label>
+						<label for="inputPreference" class="col-sm-3 control-label">Preference</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputType" placeholder="Type">
+							<input type="text" class="form-control" id="inputPreference" placeholder="Your preference">
 						</div>
 					</div>
                     <div class="form-group">
-						<label for="inputTopic" class="col-sm-3 control-label">Topic: </label>
+						<label for="inputActive" class="col-sm-3 control-label">Active</label>
 						<div class="col-sm-9">
-							<input type="datetime-local" class="form-control" id="inputTopic" placeholder="Your Topic">
+							<input type="checkbox" class="form-control" id="inputActive" placeholder="Active">
 						</div>
 					</div>
 					<div class="form-group">
@@ -138,22 +138,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
 
-		function getQueryString(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-			var r = window.location.search.substr(1).match(reg);
-			if (r != null) {
-				return unescape(r[2]);
-			}
-			return null;
-		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
-	})
-</script>
 	
 </body>
 </html>
