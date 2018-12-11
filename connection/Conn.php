@@ -129,7 +129,7 @@ class Conn
             $content = file_get_contents("./e-mail.html");
             // $msg = str_replace('%USERLOGIN%', $message, $content);
 
-            $message_code = Swift_Message::newInstance("TEST", '', 'text/html', 'base64')
+            $message_code = Swift_Message::newInstance("Thanks for subscribing open-lab", '', 'text/html', 'base64')
             ->setFrom(array(Configs::SERVER_MAIL_FROM => Configs::SERVER_MAIL_FROM_NAME))
             ->setSender(Configs::SERVER_MAIL_SEND, Configs::SERVER_MAIL_SEND_NAME)
             ->setTo($to)
