@@ -53,11 +53,10 @@
                 time:<input name="time" type="text" id="time" size="15"value="123" />
                 description:<input name="description" type="text" id="description" size="15"  value="adfkjl"/> -->
                 <!-- <input type="button" name="Submit" value="button" onclick="javascript:goIframe();" /> -->
-              
+
               <!-- </form> -->
  <!--test passing parameters from parent page to the iframe -->
-           
-              
+
     <div class="upperRightButton">
         <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
         <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="schedule()">Schedule</button>
@@ -108,7 +107,7 @@
                                 </span>
                             </div>
                             <br /><br />
-                        
+
                         <div class="form-group">
                             <div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
                                 <button type="button" class="btn btn-default" onclick="postSend()" class="upperRightButton">Post</button>
@@ -131,9 +130,9 @@
                             <li role="presentation">
                                 <a href="#showcase" aria-controls="showcase" role="tab" data-toggle="tab">Showcase</a>
                             </li>
-                            <li role="presentation">
+                            <!-- <li role="presentation">
                                 <a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab">Schedule</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
 
@@ -158,12 +157,12 @@
                                                 <a href = "https://teaching.pitt.edu/newsletter/teaching-center-update-for-nov-30-2018/">Permalink to Teaching Center Update for Nov. 30, 2018</a>
                                                 <img src = "https://image.flaticon.com/icons/svg/265/265683.svg" alt = "image" style="float:right;width:45px;height:45px;">
                                             </div>
-                    
+
                                         </div>
                                         <div class="row">
                                             <div class="content">
                                                 The deadline to submit a proposal for the Pittsburgh Regional Faculty Symposium is <span color = "blue">Sunday, December 2, at 11:59 p.m. EST</span>. The symposium committee is accepting proposals for four session types across two themes focusing on teaching and learning or educational development. Visit our website for more information on proposals, as well as details on the symposium.<br>
-                                                
+
                                                 <br>Organized by the Pittsburgh Council on Higher Education and hosted by the University of Pittsburgh, the symposium is a day-long conference on <span color = "blue">Monday, March 11, 2019</span>, for faculty, teaching assistants, and faculty support specialists from colleges and universities in Pennsylvania and its adjacent states. Registration will open next month and cost $25 per person (no charge for graduate student teaching assistants).</div>
                                             <div class="link">
                                                 <a href="#detailModel" data-toggle="modal">more </a>
@@ -279,7 +278,7 @@
                                     <input type="text" class="form-control" id="inputName" style="width: 90%;">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group" style="padding: 15px">
                                 <label for="inputPassword" class="col-sm-2 control-label">Password: </label>
                                 <div class="col-sm-10">
@@ -520,10 +519,10 @@
             "user_name": name,
             "working_machine": device,
             "start_time": start,
-            "end_time": end, 
+            "end_time": end,
         };
         console.log(param);
-        
+
         var saveData = $.ajax({
                   type: 'POST',
                   url: url,
@@ -544,11 +543,11 @@
                     else {
                     console.log('fail to load category');
                     alert('Failed to load sub-categories');
-                    }       
+                    }
                   }
             });
             saveData.error(function(e) { alert("Something went wrong: "+e); });
-            
+
         /*
         <div class="form-group">
                             <label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
