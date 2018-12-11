@@ -8,17 +8,6 @@ class Conn
     {
         $this->ATkey = Configs::AIR_TABLE_KEY;
         $this->ATId  = Configs::AIR_TABLE_APP_ID;
-        // $this->getArrays(['model'=>'Voyager.com']);
-        //postItem
-        // $this->postItem(['model'=>'Voyager.com']);
-        // updateItem
-        // $this->updateItem(['id'=> 'recY6WuZuOcPTT2IW',
-        //                    'model'=>'Voyager.com',
-        //                    'queries'=>["fields"=>
-        //                         ["Headline"=> "Voyager test"]]
-        //                       ]);
-        // deleteItem
-        // $this->deleteItem(['model'=>'Voyager.com', 'id'=>'recY6WuZuOcPTT2IW']);
     }
 
     public function deleteItem($params) {
