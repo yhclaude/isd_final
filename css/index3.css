@@ -19,7 +19,9 @@ body {
 	list-style: none;
 	display: inline-block;
 }
-
+#tabs {
+	margin-top: 30px;
+}
 .tabPage > ul > li {
 	width: calc((100% / 2) - 22px);
 
