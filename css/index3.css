@@ -21,7 +21,7 @@ body {
 }
 
 .tabPage > ul > li {
-	width: calc((100% / 3) - 22px);
+	width: calc((100% / 2) - 22px);
 
 }
 .tabPage > ul > li > a {
