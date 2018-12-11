@@ -13,7 +13,7 @@ $user = new Users();
 if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     echo $user->login($r);
     return;
-} else if ($r['segs'][0] == 'logs') {
+} else if ($r['segs'][0] == 'logs' && count($r['segs'])==1) {
     $r['queries']['sort'] = '&sort%5B0%5D%5Bfield%5D=log_id&sort%5B0%5D%5Bdirection%5D=desc';
 
 }else {

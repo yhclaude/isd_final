@@ -34,10 +34,12 @@ class Conn
     }
 
     public function updateItem($params) {
-        $data = $params['queries'];
+        $data['fields'] = $params['queries'];
         $id = $params['id'];
         unset($queries['id']);
         $data_string = json_encode($data);
+        // echo $data_string;
+        // exit;
         $url = $this->getUrl($params);
         $ch = curl_init($url);
 
@@ -46,14 +48,14 @@ class Conn
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
+            'Content-Length: ' . strlen($data_string)
         /*'Authorization: The document shows the api key show be set in header, but it seems not work'*/)
         );
-
-        $response = curl_exec($ch);
-        if(!$response) {
-            return false;
+        $result = curl_exec($ch);
+        if($result) {
+            $res = ['code'=>200, 'data'=>json_decode($result)];
         }
-        return json_encode($response);
+        return json_encode($res);
     }
 
     public function postItem($params) {
@@ -73,7 +75,10 @@ class Conn
             'Content-Length: ' . strlen($data_string))
         );
         $result = curl_exec($ch);
-        return $result;
+        if($result) {
+            $res = ['code'=>200, 'data'=>json_decode($result)];
+        }
+        return json_encode($res);
     }
 
     public function getArrays($params) {
