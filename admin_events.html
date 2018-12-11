@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
+		a:hover {
+			cursor: pointer;
+		}
 		
 		body.admin-body {
 			color: rgb(112, 112, 112);
@@ -22,7 +25,7 @@
 		}
 
 		.upperRightButton button, body.admin-body a.btn.active {
-			background-color: rgb(24, 123, 119);
+			background-color: #1c2957;;
 			color: rgb(224, 224, 224);
 			font-size: 16px;
 			padding: 4px 10px;
@@ -35,7 +38,7 @@
 			padding: 4px 10px;
 		}
 		li.page-item.active>a.page-link {
-			background-color: rgb(24, 123, 119);
+			background-color: #1c2957;;
 		}
 
 		.admin-page {
@@ -133,14 +136,12 @@
 		<div class="row admin-content">
 			<div class="col-md-3 left-navbar">
 				<ul class="left-navbar-menu">
-					<li><a href="#" class="btn" role="button">Users</a></li>
-					<li><a href="#" class="btn active" role="button">Events</a></li>
-					<li><a href="#" class="btn" role="button">Video Links</a></li>
-					<li><a href="#" class="btn" role="button">Showcases</a></li>
-					<li><a href="#" class="btn" role="button">Appointments</a></li>
-					<li><a href="#" class="btn" role="button">Subscribes</a></li>
-					<li><a href="#" class="btn" role="button">Devices</a></li>
-					<li><a href="#" class="btn" role="button">Logs</a></li>
+					<li><a href="admin_users.html" class="btn" role="button">Users</a></li>
+					<li><a href="admin_events.html" class="btn active" role="button">Events</a></li>
+					<li><a href="admin_showcases.html" class="btn" role="button">Showcases</a></li>
+					<li><a href="admin_subscribes.html" class="btn" role="button">Subscribes</a></li>
+					<li><a href="admin_devices.html" class="btn" role="button">Devices</a></li>
+					<li><a href="admin_log.html" class="btn" role="button">Logs</a></li>
 					
 				</ul>
 			</div>
@@ -213,7 +214,7 @@
 							$divStart = $('<div class="col-md-4">Type: </div>');
 							$divEnd = $('<div class="col-md-8">Topic: </div>');
 							$divEdit = $('<div class="edit"></div>');
-							$divDelete = $('<div></div>');
+							$divDelete = $('<div class="delete"></div>');
 							$divEditButton = $('<a type="button">Edit</a>');
 							$divDeleteButton = $('<a type="button">Delete</a>');
 							$('.right-content-ul').append($li);
@@ -242,8 +243,8 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_events_edit.html?user_id='+res.data[i].id);
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('href','admin_log_delete?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_events_edit.html?id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -290,6 +291,25 @@
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/events', 'get');
 		});
+
+		$('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/events/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
 	})
 </script>
 	

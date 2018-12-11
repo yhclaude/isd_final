@@ -45,6 +45,18 @@
 </head>
 
 <body>
+<!--test passing parameters from parent page to the iframe -->
+<!-- <form id="form1" name="form1" method="post" action=""> -->
+                <!-- title:<input name="title" type="text" id="title" size="15" value="hhh"/>
+                author:<input name="author" type="text" id="author" size="15"value="aaa" />
+                time:<input name="time" type="text" id="time" size="15"value="123" />
+                description:<input name="description" type="text" id="description" size="15"  value="adfkjl"/> -->
+                <!-- <input type="button" name="Submit" value="button" onclick="javascript:goIframe();" /> -->
+              
+              <!-- </form> -->
+ <!--test passing parameters from parent page to the iframe -->
+           
+              
     <div class="upperRightButton">
         <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
         <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="contactUs()" style="display:none;">Contact Us</button>
@@ -199,37 +211,10 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="showcase">
                             <div class="row showcaseDiv">
-                                <!-- <div class="col-md-6">
-                                    <div class="showcase_img">
-                                        <img src="images/showcase4.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase1.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase2.png" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="showcase_img">
-                                        <img src="images/showcase3.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase4.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase.png" />
-                                    </div>
-                                    <div class="showcase_img">
-                                        <img src="images/showcase2.png" />
-                                    </div>
-                                </div> -->
 
                                 <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>
-
+                                <iframe id="lightroom"  name="lightroom"  src="./lightroom.html" frameborder="0" width="640" height="360">                                                                     
+                                </iframe>                         
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="schedule">
@@ -285,7 +270,10 @@
                         </div>
                         <div class="form-group">
                             <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
-                                <button type="button" class="btn btn-default" onclick="subscribeSend()">Subscribe</button>
+
+                                <button type="button" class="btn btn-default" >Subscribe</button>
+
+                                <button type="button" class="btn btn-default" style="background-color:#1c2957" onclick="subscribeSend()">Subscribe</button>
                             </div>
                         </div>
                     </form>
@@ -573,24 +561,6 @@
                             </div>
                         </div>
         */
-    }
-
-    /*
-    function contactUs(){
-        var text = document.getElementById("contact").innerHTML;
-        address = "test@pitt.edu";
-        location.href("mailto:" + address);
-        
-        if(text == "Contact Us"){
-            alert(text);
-            var address = "demo@pitt.edu";
-            location.href("mailto: " + address);
-        }
-        else{
-            location.href("http://localhost/isd_final/admin_users.html");
-            alert("switch");
-        }
-    */
     }
 </script>
 </html>
