@@ -33,6 +33,7 @@
             position: relative;
         }
         .title {
+            color: #428bca;
             font-size: 20px;
             padding-left: 20px;
         }
@@ -153,10 +154,17 @@
                                 <div class="open_lab_content announcement_tab">
                                     <li>
                                         <div class="row">
-                                            <div class="title">Name: </div>
+                                            <div class="title">
+                                                <a href = "https://teaching.pitt.edu/newsletter/teaching-center-update-for-nov-30-2018/">Permalink to Teaching Center Update for Nov. 30, 2018</a>
+                                                <img src = "https://image.flaticon.com/icons/svg/265/265683.svg" alt = "image" style="float:right;width:45px;height:45px;">
+                                            </div>
+                    
                                         </div>
                                         <div class="row">
-                                            <div class="content">  Test: ABC</div>
+                                            <div class="content">
+                                                The deadline to submit a proposal for the Pittsburgh Regional Faculty Symposium is <span color = "blue">Sunday, December 2, at 11:59 p.m. EST</span>. The symposium committee is accepting proposals for four session types across two themes focusing on teaching and learning or educational development. Visit our website for more information on proposals, as well as details on the symposium.<br>
+                                                
+                                                <br>Organized by the Pittsburgh Council on Higher Education and hosted by the University of Pittsburgh, the symposium is a day-long conference on <span color = "blue">Monday, March 11, 2019</span>, for faculty, teaching assistants, and faculty support specialists from colleges and universities in Pennsylvania and its adjacent states. Registration will open next month and cost $25 per person (no charge for graduate student teaching assistants).</div>
                                             <div class="link">
                                                 <a href="#detailModel" data-toggle="modal">more </a>
                                             </div>
@@ -168,37 +176,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                Test Content.
+                                                Teaching Survey Period
                                             </div>
                                             <div class="col-md-4">
-                                                Name:
-                                            </div>
-                                            <div class="link">
-                                                <a href="">Register </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="row">
-                                            <div class="title">Name: </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="content">  Test: ABC</div>
-                                            <div class="link">
-                                                <a href="#detailModel" data-toggle="modal">more </a>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="line">
-                                                <hr/>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                Test Content.
-                                            </div>
-                                            <div class="col-md-4">
-                                                Name:
+                                                Seminar
                                             </div>
                                             <div class="link">
                                                 <a href="">Register </a>
@@ -369,12 +350,12 @@
                 $.each(res.data.announcement,function(i) {
                     $('.announcement_tab').append('<li> \
                         <div class="row"> \
-                            <div class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') </div> \
+                            <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') <img src = "https://image.flaticon.com/icons/svg/265/265683.svg" alt = "image" style="float:right;width:55px;height:55px;padding:10px"> </a> \
                         </div> \
                         <div class="row"> \
                             <div class="content">' + res.data.announcement[i].fields.event_description + '</div> \
                             <div class="link"> \
-                                <a href="">more </a> \
+                                <a href="https://teaching.pitt.edu/newsletter/">more </a> \
                             </div> \
                         </div> \
                         <div class="row"> \
