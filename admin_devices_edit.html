@@ -100,26 +100,26 @@
 			</div>
 			<div class="col-md-9 right-content">
 				<div class="form-header">Edit Device</div>
-				<form class="form-horizontal" type="" action="">
+				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputDevicename" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputDevicenname" placeholder="Enter your device name please">
+							<input type="text" class="form-control" id="inputDevicenname" placeholder="Enter your device name please" name="device_name">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputWorking" class="col-sm-3 control-label">Working</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputWorking">
+							<input type="checkbox" class="form-control" id="inputWorking" name="device_isWorking">
 						</div>
                         <label for="inputAvailability" class="col-sm-3 control-label">Availability:</label>
 						<div class="col-sm-9">
-							<input type="checkbox" class="form-control" id="inputAvailability">
+							<input type="checkbox" class="form-control" id="inputAvailability" name="device_isAvailable">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							<button type="submit" class="btn btn-primary">Confirm</button>
+							<button id="submit" type="button" class="btn btn-primary">Confirm</button>
 						</div>
 					</div>
 				</form>
@@ -142,9 +142,43 @@
 			}
 			return null;
 		}
-		var user_id = getQueryString("user_id");
-		var href = $('form').attr("action");
-		$('form').attr("action", href + "?user_id=" + user_id);
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/devices/'+ user_id +'?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var de_isWork = "";
+ 			var de_isAvail = "";
+ 			if($("input[name='device_isWorking']").prop("checked")) {
+ 				de_isWork = 1;
+ 			}
+ 			if($("input[name='device_isAvailable']").prop("checked")) {
+ 				de_isAvail = 1;
+ 			}
+			var getParams = {
+				"fields": {
+					device_name: $("input[name='device_name']").val(),
+					device_isWorking: de_isWork,
+					device_isAvailable: de_isAvail
+				}
+			};
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Edit successfully!');
+						location.href = "http://localhost/isd_final/admin_devices.html"
+					} else {
+						alert('Edit failed!');
+					}
+				}
+			})
+		})
 	})
 </script>
 	

@@ -243,7 +243,7 @@
 
 
 							// edit and delete with id
-							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_showcases_edit.html?user_id='+res.data[i].id);
+							$('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href','admin_showcases_edit.html?id='+res.data[i].id);
 							$('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
