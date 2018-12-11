@@ -6,7 +6,7 @@ body {
 .upperRightButton {
 	position: absolute;
 	right: 40px;
-	top: 20px;
+	top: 65px;
 }
 
 .tabPage nav {
@@ -140,4 +140,32 @@ p {
     .login-modal {
         height: 300px;
     }
+}
+
+.header {
+    background-color: #1a2858;
+}
+@media (min-width: 1200px){
+    .head {
+        width: 1170px;
+    }
+}
+    
+@media (min-width: 992px) {
+    .head {
+        width: 970px;
+    }
+}
+@media (min-width: 768px) {
+    .head {
+        width: 750px;   
+    }
+}
+
+.logo {
+    height: 50px;
+}
+.head {
+    margin: 0 auto;
+    padding: 5px;
 }

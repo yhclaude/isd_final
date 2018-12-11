@@ -39,7 +39,7 @@
 		}
 
 		.admin-page {
-			margin-top: 50px;
+			margin-top: 10px;
 		}
 
 		.admin-page .admin-header {
@@ -75,10 +75,71 @@
 	</style>
 </head>
 <body class="admin-body">
+	<header class="header">
+        <div class="head">
+            <img class="logo" src="images/pitt-logo.png">
+        </div>
+    </header>
 	<div class="upperRightButton">
 		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
 		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
 	</div>
+	    <div id="staffModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+				<div class="modal-header-close" style="padding:3%">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+					<form role="form">
+						<div class="form-group">
+							<label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
+								<br /><br />
+						</div>
+						<div class="form-group">
+							<label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+								<br />
+							<span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
+							<input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
+										placeholder="13:00 -- 17:00">
+								</span>
+						</div>
+						<br /><br />
+						<div class="form-group">
+							<span>
+								<label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+							</span>
+							<br />
+   
+							<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+								<select style="width: 75%">
+										<option value="1">3D Printing</option>
+										<option value="2">Virtual Reality</option>
+										<option value="3">360° Video Camera & Viewer</option>
+										<option value="4">360° Video Projector</option>
+									</select>
+							</span>                            
+						</div>
+							<br /><br />
+						<div class="form-group">
+							<label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+							<div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+								<textarea class="form-control" rows="6" cols="80" name="current event" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
+								<button type="button" class="btn btn-default" class="upperRightButton"style="color:white; background-color:#1c2957">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
