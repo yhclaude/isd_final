@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+    
+    <style type="text/css">
+    body { background-color:#333;}
+    h1 { color:#fff;}
+        .jlr {font-size: 0px}
+
+.jlr .jlr_item {
+    font-size: 10rem;
+    display: inline-block;
+    box-sizing: border-box;     
+    padding: 5px;
+}
+
+.jlr img.jlr_img {
+    height: 200px;
+    opacity: 1;
+}
+
+.jlr img.jlr_loaded {
+     -webkit-transition: opacity 1s ease-in;
+    -moz-transition: opacity 1s ease-in;
+    -o-transition: opacity 1s ease-in;
+    -ms-transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
+    opacity: 1;
+}
+
+.gray_out {
+    background-color: #eee;
+}
+        </style>
+
+<!-- Process parameters from the parent page -->
+<script>
+
+    
+</script>
+
+  </head>
+  <body>  
+        <div id="jLightroom" class="jlr gray_out">
+           <a href="images/showcase4.png" data-lightbox="lb1" data-title=title class="jlr_item"><img  src="images/showcase4.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase1.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase1.png" class="jlr_img"style="width:310px;height:200px"/></a>
+           <a href="images/showcase2.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase2.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase3.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase3.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase4.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase4.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase1.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase1.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase2.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase2.png" class="jlr_img" style="width:310px;height:200px"/></a>
+           <a href="images/showcase3.png" data-lightbox="lb1" data-title="Author:" class="jlr_item"><img  src="images/showcase3.png" class="jlr_img"style="width:310px;height:200px" /></a>
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <script src="jquery.lightroom.js"></script>
+    
+    <script type="text/javascript">
+        $("#jLightroom").lightroom({
+            image_container_selector: ".jlr_item",
+            img_selector: "img.jlr_img",   
+            img_class_loaded: "jlr_loaded",
+            img_space: 5,
+            img_mode: 'max',
+            init_callback: function(elem){$(elem).removeClass("gray_out")}
+        }).init();
+    </script>
+  </body>
+</html>
