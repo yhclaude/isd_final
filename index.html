@@ -59,7 +59,7 @@
               
     <div class="upperRightButton">
         <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
-        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="contactUs()" style="display:none;">Contact Us</button>
+        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="schedule()">Schedule</button>
     </div>
     <div id="staffModal" class="modal fade" role="dialog">
             <div class="modal-dialog" role="document">
@@ -271,8 +271,6 @@
                         <div class="form-group">
                             <div class="formButton" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
 
-                                <button type="button" class="btn btn-default" >Subscribe</button>
-
                                 <button type="button" class="btn btn-default" style="background-color:#1c2957" onclick="subscribeSend()">Subscribe</button>
                             </div>
                         </div>
@@ -348,6 +346,7 @@
 
 <script src="js/user.js"></script>
 <script>
+    var logged = "0";
     $(function () {
         $("#footer").load("./template/footer.html");
         $.ajax({
@@ -409,7 +408,7 @@
             "#inputPassword").text);
 
         var username = document.getElementById("inputName").value;
-        var password = document.getElementById("inputPassword").value
+        var password = document.getElementById("inputPassword").value;
         var url = "./connection/index.php/users/login";
         console.log(localStorage.getItem("code"));
         var param = {
@@ -430,8 +429,11 @@
                     title.innerHTML = "<b>Hi, " + subcategorys.username + "!</b>"
                     var button = document.getElementById("subscribe");
                     button.innerHTML = "Update";
-                    button = document.getElementById("contact");
-                    button.innerHTML = "SwitchMode";
+                    logged = "1";
+
+                    document.getElementById("inputName").value = "";
+                    document.getElementById("inputPassword").value = "";
+
                     document.getElementById("logclose").click();
                 } else {
                     console.log('fail to load category');
@@ -454,7 +456,6 @@
 
     function subscribeSend(){
         var url = "http://localhost/isd_final/connection/index.php/subscribers";
-
         var name = document.getElementById("subsname").value;
         var email = document.getElementById("email").value;
         var cbox = document.getElementsByName("check");
@@ -466,13 +467,6 @@
             }
         }
 
-        /*
-        var param = {
-                "subscriber_name": "Eden",
-                "subscriber_email": "tat73@pitt.edu",
-                "subscriber_preference": "123456",
-        };
-        */
         var param = {
             "subscriber_name": name,
             "subscriber_email": email,
@@ -485,12 +479,17 @@
                   data: JSON.stringify(param),
                   dataType: "text",
                   success: function(resultData) {
-                    var res = JSON.parse(resultData);
+                    console.log(resultData);
+                    var res = resultData;
                     if (res.code == 200) {
                         subcategorys = res.data;
                         console.log(resultData);
-                        document.getElementById("subClose").click();
 
+                        document.getElementById("subsname").value = "";
+                        document.getElementById("email").value = "";
+                        $("input[name='check']").prop("checked",false);
+
+                        document.getElementById("subClose").click();
                     }
                     else {
                     console.log('fail to load category');
@@ -499,6 +498,21 @@
                   }
             });
             saveData.error(function(e) { alert("Something went wrong: "+e); });
+    }
+
+    function schedule() {
+        if(logged == "0"){
+            logged = location.href;
+            var len = logged.length;
+            var start = logged.indexOf("=");
+            logged = logged.substring(start+1, len);
+        }
+        if(logged == "1"){
+            window.location.href = "http://localhost/isd_final/admin_users.html" + "?logged=" + logged;
+        }
+        else{
+            window.location.href = "https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt";
+        }
     }
 
     function postSend(){
@@ -543,6 +557,10 @@
                         subcategorys = res.data;
                         console.log(resultData);
                         document.getElementById("postClose").click();
+
+                        document.getElementById("start_time").value = "";
+                        document.getElementById("end_time").value = "";
+
                         console.log(res);
                     }
                     else {

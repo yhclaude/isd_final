@@ -125,7 +125,7 @@
 <body class="admin-body">
 	<div class="upperRightButton">
 		<button data-toggle="modal" data-target="#subscribeModal" type="button" class="btn btn-default">Update</button>
-		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Switch Mode</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default" onclick="switchMode()">Switch Mode</button>
 	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
@@ -172,6 +172,7 @@
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
 		$('#pageNumber').data('offset',['']);
@@ -311,6 +312,19 @@
 			})
 		})
 	})
+
+	function switchMode(){
+		var logged = location.href;
+        var len = logged.length;
+        var start = logged.indexOf("=");
+        logged = logged.substring(start+1, len);
+        if(logged == "1"){
+			window.location.href = "http://localhost/isd_final/index.html" + "?logged=1";
+		}
+		else{
+			window.location.href = "http://localhost/isd_final/index.html"
+		}
+	}
 </script>
 	
 </body>
