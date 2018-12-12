@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
+    <title>Open Lab</title>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link href="css/index3.css" rel="stylesheet">
+    <style>
+        .open_lab_content li{
+            list-style: none;
+            font-size: 16px;
+            padding: 15px;
+            width: 100%;
+            border: 0px;
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 15px;
+            position: relative;
+        }
+        hr{
+            width: 95%;
+            size: 1px;
+        }
+        .link {
+            text-align: right;
+            padding-right: 20px;
+            position: relative;
+        }
+        .title {
+            color: #428bca;
+            font-size: 20px;
+            padding-left: 20px;
+        }
+        .content {
+            font-size: 16px;
+            padding-left: 20px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+<!--test passing parameters from parent page to the iframe -->
+<!-- <form id="form1" name="form1" method="post" action=""> -->
+                <!-- title:<input name="title" type="text" id="title" size="15" value="hhh"/>
+                author:<input name="author" type="text" id="author" size="15"value="aaa" />
+                time:<input name="time" type="text" id="time" size="15"value="123" />
+                description:<input name="description" type="text" id="description" size="15"  value="adfkjl"/> -->
+                <!-- <input type="button" name="Submit" value="button" onclick="javascript:goIframe();" /> -->
+
+              <!-- </form> -->
+ <!--test passing parameters from parent page to the iframe -->
+           
+    <header class="header">
+        <div class="head">
+            <img class="logo" src="images/pitt-logo.png">
+        </div>
+    </header>
+    <div class="upperRightButton">
+        <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
+        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="schedule()">Schedule</button>
+    </div>
+    <div id="staffModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+                    <div class="modal-header-close" style="padding:3%">
+                        <button type="button" id="postClose" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="title" id="logtitle" style="color: white;font-size: 22px;">Hi John!</label>
+                                <br /><br />
+                            </div>
+                            <div class="form-group">
+                                <label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+                                <br />
+                                <span style="padding-top:8%">
+                                    <label style="color:white; font-size: 16px; float: left;">Start Time:</label>
+                                    <input type="datetime-local" class="form-control" id="start_time" placeholder="Start Time">
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span style="padding-top:8%">
+                                    <label style="color:white; font-size: 16px; float: left;">End Time:</label>
+                                    <input type="datetime-local" class="form-control" id="end_time" placeholder="Start Time">
+                                </span>
+                            </div>
+                            <br /><br />
+                            <div class="form-group">
+                                <span>
+                                    <label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+                                    <!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+                                </span>
+                                <br />
+
+                                <span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+                                    <select id="device"  class="form-control">
+                                        <option value="1">3D_Printing</option>
+                                        <option value="2">Virtual_Reality</option>
+                                        <option value="3">360°_Video_Camera&Viewer</option>
+                                        <option value="4">360°_Video_Projector</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <br /><br />
+
+                        <div class="form-group">
+                            <div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
+                                <button type="button" class="btn btn-default" onclick="postSend()" class="upperRightButton">Post</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
+                <div id="tabs">
+                    <div class="tabPage">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#open_lab" aria-controls="open_lab" role="tab" data-toggle="tab">Open Lab</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#showcase" aria-controls="showcase" role="tab" data-toggle="tab">Showcase</a>
+                            </li>
+                            <!-- <li role="presentation">
+                                <a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab">Schedule</a>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="open_lab">
+                            <div>
+                                <div id="streaming_title" class="open_lab_title">
+                                    Now We are streaming
+                                </div>
+                                <div class="open_lab_content">
+                                    <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="open_lab_title">
+                                    Announcement
+                                </div>
+                                <div class="open_lab_content announcement_tab">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="showcase">
+                            <div class="row showcaseDiv">
+
+                                <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="schedule">
+                            <div class="row">
+                                <iframe src="https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <div id="subscribeModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+                <div class="modal-header-close">
+                    <button type="button" class="close" id="subClose" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding-top: 50px;padding-right: 120px;padding-bottom: 50px;padding-left: 120px;">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="title" style="color: white;font-size: 18px;"><b>Subscribe Open Lab</b></label>
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label for="name" style="color: white; font-size: 16px;">name</label>
+                            <input type="text" class="form-control" id="subsname" >
+                        </div>
+                        <div class="form-group">
+                            <label for="email" style="color: white; font-size: 16px;">Email</label>
+                            <input type="text" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="interest topic" style="color: white; font-size: 16px;">Tell us what you're
+                                interested in</label>
+                            <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="VirtualReality" name = "check">Virtual Reality</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="3Dprinting" name = "check">3D printing</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name = "check" value="360°VideoCamera&Viewer" >360° Video Camera & Viewer</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name = "check" value="360°VideoProjector">360° Video Projector</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
+                                <button type="button" class="btn btn-default" class="upperRightButton" onclick="subscribeSend()">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="userModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content login-modal" style="background-color: white; opacity: 0.95;">
+                <div class="modal-header-close">
+                    <button type="button" id="logclose" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: black;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-size: 14px">
+                    <div class="title">
+                        Hi, Welcome back!
+                        <br />
+                    </div>
+                    <div class="row">
+                        <form>
+                            <div class="form-group" style="padding: 15px">
+                                <label for="inputName" class="col-sm-2 control-label">Account: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" style="width: 90%;">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="padding: 15px">
+                                <label for="inputPassword" class="col-sm-2 control-label">Password: </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword" style="width: 90%;">
+                                </div>
+                            </div>
+                            <div class="form-group" style="padding: 15px; text-align: right; padding-right: 50px">
+                                <div class="col-sm-offset-2 col-sm-10 formButton">
+                                    <!-- <button type="button" class="btn btn-default" id="login()">Login</button> -->
+                                    <button type="button" name="button" class="btn btn-default" onclick="login()">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
+            <hr>
+            <div class="col-sm-8 col-xs-8">
+                <p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
+                <p><span data-feather="phone" style="width:14px; height:14px;"></span> 412-624-3335</p>
+                <p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
+            </div>
+
+            <div class="col">
+                <a data-toggle="modal" data-target="#userModal">Staff Login</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+<script src="js/user.js"></script>
+<script>
+    var logged = "0";
+    $(function () {
+        $("#footer").load("./template/footer.html");
+        $.ajax({
+            url: 'http://localhost/isd_final/connection/index.php/announcement/homepage',
+            type: 'get',
+            data: {
+                sess: '13123'
+            },
+            dataType:'json',
+
+            success: function(res) {
+                if(res.data.streaming.video_id){
+                    var iframeSrc = $('#ytplayer').attr("src") + res.data.streaming.video_id + '?autoplay=1&origin=http://example.com';
+                    $('#ytplayer').attr("src", iframeSrc);
+                } else {
+                    $('#ytplayer').css("display","none");
+                    $('#streaming_title').html("");
+                }
+
+                $.each(res.data.announcement,function(i) {
+                    $('.announcement_tab').append('<li> \
+                        <div class="row"> \
+                            <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') <img src = "https://image.flaticon.com/icons/svg/265/265683.svg" alt = "image" style="float:right;width:55px;height:55px;padding:10px"> </a> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="content">' + res.data.announcement[i].fields.event_description + '</div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="line"> \
+                                <hr/> \
+                            </div> \
+                        </div> \
+                        <div class="row"> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_topic + ' \
+                            </div> \
+                            <div class="col-md-4"> \
+                                ' + res.data.announcement[i].fields.event_type + '  \
+                            </div> \
+                        </div> \
+                    </li>');
+                })
+
+
+
+
+            }
+        })
+    });
+
+    function login() {
+        console.log("./connection/index.php/users/login?account=" + $("#inputName").text + "&password=" + $(
+            "#inputPassword").text);
+
+        var username = document.getElementById("inputName").value;
+        var password = document.getElementById("inputPassword").value;
+        var url = "./connection/index.php/users/login";
+        console.log(localStorage.getItem("code"));
+        var param = {
+            "account": username,
+            "password": password,
+        };
+        var saveData = $.ajax({
+            type: "GET",
+            url: url,
+            data: param,
+            dataType: "JSON",
+            success: function(resultData){
+                console.log(resultData);
+                var res = resultData;
+                if (res.code == 200) {
+                    subcategorys = res.data;
+                    var title = document.getElementById("logtitle");
+                    title.innerHTML = "<b>Hi, " + subcategorys.username + "!</b>"
+                    var button = document.getElementById("subscribe");
+                    button.innerHTML = "Update";
+                    logged = "1";
+
+                    document.getElementById("inputName").value = "";
+                    document.getElementById("inputPassword").value = "";
+
+                    document.getElementById("logclose").click();
+                } else {
+                    console.log('fail to load category');
+                    alert('Failed to load sub-categories');
+                }
+            }
+        });
+        saveData.error(function(e) { alert("Something went wrong: "+e); });
+    }
+
+    function subClick(){
+        var button = document.getElementById("subscribe");
+        if(button.innerHTML == "Subscribe"){
+            $("#subscribeModal").modal("toggle");
+        }
+        else{
+            $("#staffModal").modal("toggle");
+        }
+    }
+
+    function subscribeSend(){
+        var url = "http://localhost/isd_final/connection/index.php/subscribers";
+        var name = document.getElementById("subsname").value;
+        var email = document.getElementById("email").value;
+        var cbox = document.getElementsByName("check");
+        var pref = "";
+        var bpref = "";
+        for(var i = 0; i < cbox.length; i++){
+            if(cbox[i].checked == true){
+                pref = pref + cbox[i].value;
+            }
+        }
+
+        var param = {
+            "subscriber_name": name,
+            "subscriber_email": email,
+            "subscriber_preference": pref,
+        };
+        console.log(param);
+        var saveData = $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: JSON.stringify(param),
+                  dataType: "text",
+                  success: function(resultData) {
+                    console.log(resultData);
+                    var res = resultData;
+                    if (res.code == 200) {
+                        subcategorys = res.data;
+                        console.log(resultData);
+
+                        document.getElementById("subsname").value = "";
+                        document.getElementById("email").value = "";
+                        $("input[name='check']").prop("checked",false);
+
+                        document.getElementById("subClose").click();
+                    }
+                    else {
+                    console.log('fail to load category');
+                    alert('Failed to load sub-categories');
+                    }
+                  }
+            });
+            saveData.error(function(e) { alert("Something went wrong: "+e); });
+    }
+
+    function schedule() {
+        if(logged == "0"){
+            logged = location.href;
+            var len = logged.length;
+            var start = logged.indexOf("=");
+            logged = logged.substring(start+1, len);
+        }
+        if(logged == "1"){
+            window.location.href = "http://localhost/isd_final/admin_users.html" + "?logged=" + logged;
+        }
+        else{
+            window.location.href = "https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt";
+        }
+    }
+
+    function postSend(){
+        var url = "http://localhost/isd_final/connection/index.php/logs";
+
+        var name = document.getElementById("logtitle").innerText;
+        name = name.split(" ");
+        name = name[1];
+        for(var i = 0; i < name.length; i++){
+            if(name[i] == "!"){
+                name = name.substring(0, i);
+                break;
+            }
+        }
+
+        var device = document.getElementById("device");
+
+        var index = device.selectedIndex;
+        var device = device.options[index].text;
+
+        var start = document.getElementById("start_time");
+        var end = document.getElementById("end_time");
+        start = start.value;
+        end = end.value;
+
+        var param = {
+            "user_name": name,
+            "working_machine": device,
+            "start_time": start,
+            "end_time": end,
+        };
+        console.log(param);
+
+        var saveData = $.ajax({
+                  type: 'POST',
+                  url: url,
+                  data: JSON.stringify(param),
+                  dataType: "text",
+                  success: function(resultData) {
+                    var res = JSON.parse(resultData);
+                    if (res.code == 200) {
+                        subcategorys = res.data;
+                        console.log(resultData);
+                        document.getElementById("postClose").click();
+
+                        document.getElementById("start_time").value = "";
+                        document.getElementById("end_time").value = "";
+
+                        console.log(res);
+                    }
+                    else {
+                    console.log('fail to load category');
+                    alert('Failed to load sub-categories');
+                    }
+                  }
+            });
+            saveData.error(function(e) { alert("Something went wrong: "+e); });
+
+        /*
+        <div class="form-group">
+                            <label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+                            <div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+                                <textarea class="form-control" id="event" rows="6" cols="80" name="current event" required></textarea>
+                            </div>
+                        </div>
+        */
+    }
+</script>
+</html>

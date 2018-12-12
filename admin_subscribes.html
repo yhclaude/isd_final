@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
+	<title>Open Lab</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		a:hover {
+			cursor: pointer;
+		}
+        
+		body.admin-body {
+			color: rgb(112, 112, 112);
+		}
+
+		.upperRightButton {
+			position: absolute;
+			right: 40px;
+			top: 20px;
+		}
+
+		.upperRightButton button, body.admin-body a.btn.active {
+			background-color: #1c2957;
+			color: rgb(224, 224, 224);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+
+		body.admin-body a.btn {
+			background-color: rgb(244, 244, 244);
+			color: rgb(112, 112, 112);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+		li.page-item.active>a.page-link {
+			background-color: #1c2957;
+		}
+
+		.admin-page {
+			margin-top: 10px;
+		}
+
+		.admin-page .admin-header {
+			margin-bottom: 10px;
+			font-weight: 700;
+			font-size: 22px;
+			position: relative;
+		}
+
+		.admin-header > .addButton {
+			position: absolute;
+			right: 35px;
+			top: 5px;
+		}
+
+		.admin-header > .addButton > a.btn {
+			background-color: #1c2957;
+			color: rgb(224, 224, 224);
+		}
+
+		.admin-content .left-navbar .left-navbar-menu {
+			border-right: 1px solid #e2e2e2;
+			padding: 0px 10px 10px 5px;
+		}
+	
+		.admin-content .left-navbar .left-navbar-menu li {
+			margin-bottom: 10px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu a {
+			width: 90%;
+			text-align: left;
+		}
+
+		.right-content-ul > li {
+			font-size: 16px;
+			padding: 15px;
+			width: 95%;
+			border: 1px solid #e2e2e2;
+			border-radius: 5px;
+			background-color: rgb(244, 244, 244);
+			margin-bottom: 15px;
+			position: relative;
+		}
+
+		.function-div{
+			width: 100px;
+			background-color: rgb(244, 244, 244);
+			position: absolute;
+			right: -80px;
+			top: 45px;
+			border: 1px solid #e2e2e2;
+			border-radius: 5px;
+			z-index: 2;
+			display: none;
+
+		}
+		.function-div > div {
+			padding-left: 25px;
+		}
+		.function-div > div > a{
+			padding: 5px;
+			color: rgb(112,112,112);
+		}
+		.edit {
+			border-bottom: 1px solid #e2e2e2;
+		}
+
+		.pull-right.pagination {
+			margin-right: 35px;
+		}
+		.right-content-ul button {
+			background-color: rgb(244, 244, 244);
+			font-size: 18px;
+			padding-bottom: 0;
+		}
+	</style>
+</head>
+<body class="admin-body">
+	<header class="header">
+        <div class="head">
+            <img class="logo" src="images/pitt-logo.png">
+        </div>
+    </header>
+	<div class="upperRightButton">
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default" onclick="switchMode()">Switch Mode</button>
+	</div>
+	    <div id="staffModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+				<div class="modal-header-close" style="padding:3%">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+					<form role="form">
+						<div class="form-group">
+							<label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
+								<br /><br />
+						</div>
+						<div class="form-group">
+							<label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+								<br />
+							<span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
+							<input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
+										placeholder="13:00 -- 17:00">
+								</span>
+						</div>
+						<br /><br />
+						<div class="form-group">
+							<span>
+								<label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+							</span>
+							<br />
+   
+							<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+								<select style="width: 75%">
+										<option value="1">3D Printing</option>
+										<option value="2">Virtual Reality</option>
+										<option value="3">360° Video Camera & Viewer</option>
+										<option value="4">360° Video Projector</option>
+									</select>
+							</span>                            
+						</div>
+							<br /><br />
+						<div class="form-group">
+							<label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+							<div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+								<textarea class="form-control" rows="6" cols="80" name="current event" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
+								<button type="button" class="btn btn-default" class="upperRightButton"style="color:white; background-color:#1c2957">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="admin-page container">
+		<div class="admin-header">
+			Content Management
+            <div class="addButton">
+				<a href="admin_subscribes_add.html" type="button" class="btn btn-default">Create Subscribe</a>
+			</div>
+		</div>
+		<div class="row admin-content">
+			<div class="col-md-3 left-navbar">
+				<ul class="left-navbar-menu">
+					<li><a href="./admin_users.html" class="btn" role="button">Users</a></li>
+					<li><a href="./admin_events.html" class="btn" role="button">Events</a></li>
+					<li><a href="./admin_showcases.html" class="btn" role="button">Showcases</a></li>
+					<li><a href="admin_subscribes.html" class="btn active" role="button">Subscribes</a></li>
+					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
+					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-md-9 right-content">
+				<ul class="right-content-ul">
+					
+				</ul>
+				<div class="pull-right pagination">
+					<ul class="pagination">
+						<li class="page-item page-pre">
+							<a disabled="true" class="btn page-link">‹</a>
+						</li>
+						<li class="page-item active">
+							<a id="pageNumber" class="page-link">0</a>
+						</li>
+						<li class="page-item page-next">
+							<a class="page-link btn">›</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+			
+	</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-en-US.js"></script>
+<script src="js/switchMode.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#pageNumber').data('offset',['']);
+
+		// var cache = {}
+
+		// ajax changePage
+		function changePage(pages, url, type, asy = false) {
+			var val = parseInt($('#pageNumber').html()) + pages;
+			$('#pageNumber').html(val);
+			if (val == 1) {
+				$('.page-pre a').attr('disabled', 'true');
+			} else {
+				$('.page-pre a').removeAttr('disabled');
+			}
+			var getParams = {
+				pageSize: 4,
+				sess: 'rFIAeA83nEiBOMHCLY3zvRNJq0P8gLb8XXhYWg1oGSyutWVVYagLFO6Uooy8LhJrmhh7sIYRYqwPz9sMQpcLNg==',
+				offset: $('#pageNumber').data('offset')[val-1]
+			}
+			$.ajax({
+				url: url,
+				type: type,
+				data: getParams,
+				async: asy,
+				dataType:'json',
+				success: function(res) {
+					if(parseInt(res.code) == 200) {
+						$('.page-next a').removeAttr('disabled');
+						$('.right-content-ul').html('');
+						$.each(res.data, function(i) {
+
+							$li = $('<li></li>');
+							$div1 = $('<div class="row"></div>');
+							$div2 = $('<div class="row"></div>');
+							$div3 = $('<div class="function-div"></div>');
+							$divName = $('<div class="col-md-4">Name: </div>');
+							$divWork = $('<div class="col-md-7">E-mail: </div>');
+							$divEditDelete = $('<div class="col-md-1 showEditDelete"></div>');
+							$divShowButton = $('<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-option-vertical"></span></button>');
+							$divStart = $('<div class="col-md-4">Preference: </div>');
+							$divEnd = $('<div class="col-md-8">Active: </div>');
+							$divEdit = $('<div class="edit"></div>');
+							$divDelete = $('<div class="delete"></div>');
+							$divEditButton = $('<a type="button">Edit</a>');
+							$divDeleteButton = $('<a type="button">Delete</a>');
+							$('.right-content-ul').append($li);
+							$('.right-content-ul').find('li').eq(i).append($div1).append($div2).append($div3);
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
+
+							// name 
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.subscriber_name + '</span>');
+
+							// email
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-7').append('<span>' + res.data[i].fields.subscriber_email + '</span>');
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-1').append($divShowButton);
+
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).append($divStart).append($divEnd);
+
+							// preference
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-4').append('<span>' + res.data[i].fields.subscriber_preference + '</span>');
+
+							// isActive
+                            $active = "No";
+                            if (res.data[i].fields.subscriber_isActive) {
+                                $active = "Yes";
+                            }
+							$('.right-content-ul').find('li').eq(i).find('div.row').eq(1).find('div.col-md-8').append('<span>' + $active + '</span>');
+
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').append($divEdit).append($divDelete);
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(0).append($divEditButton);
+							$('.right-content-ul').find('li').eq(i).find('div.function-div').find('div').eq(1).append($divDeleteButton);
+
+
+							// edit and delete with id
+                            $('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href', 'admin_subscribes_edit.html?id=' + res.data[i].id);						
+                            $('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
+                            
+							if (res.offset) {
+								var offsetArr = $('#pageNumber').data('offset');
+								offsetArr[$('#pageNumber').html()] = res.offset;
+								$('#pageNumber').data('offset',offsetArr);
+							} else {
+								$('.page-next a').attr('disabled', 'true');
+							}
+							
+						})
+						// click show hide
+						$('.right-content-ul > li').each(function(){
+							$(this).find('.showEditDelete > button').click(function(e) {
+								$(this).closest('li').find('.function-div').show();
+								$(document).one("click", function(){
+									$('.right-content-ul > li > .function-div').hide();
+								});
+								e.stopPropagation();
+
+							});
+							$(this).find('.function-div').click(function(e) {
+								e.stopPropagation();
+							})
+						})
+					} 
+					else {
+						var val = parseInt($('#pageNumber').html()) - 1;
+						$('#pageNumber').html(val);
+						
+					}	
+				},
+				error: function(err) {
+					console.log(err.responseText);
+				}
+			})
+		}
+
+		// next page api route
+		$('.page-next a').click(function() {
+			changePage(1, 'http://localhost/isd_final/connection/index.php/subscribers', 'get');
+		});
+		$('.page-next a').click();
+
+
+		$('.page-pre a').click(function() {
+			changePage(-1, 'http://localhost/isd_final/connection/index.php/subscribers', 'get');
+		});
+        
+        $('.right-content-ul > li > .function-div > .delete > a').click(function(){
+			$.ajax({
+				url: 'http://localhost/isd_final/connection/index.php/subscribers/' + $(this).attr('data'),
+				type: 'delete',
+				data: {
+					sess: '13123'
+				},
+				dataType:'json',
+				success: function(res) {
+					if(res.deleted == true) {
+						alert('Deleted successfully!');
+						location.reload();
+					} else {
+						alert('Deleted failed!');
+					}
+				}
+			})
+		})
+	})
+</script>
+	
+</body>
+</html>

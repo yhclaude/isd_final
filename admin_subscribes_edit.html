@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Description" Content="Learn more about programmatic technology, B2B advertising and campaign reporting.">
+	<title>Open Lab</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		
+		body.admin-body {
+			color: rgb(112, 112, 112);
+		}
+
+		.upperRightButton {
+			position: absolute;
+			right: 40px;
+			top: 20px;
+		}
+
+		.upperRightButton button, body.admin-body a.btn.active {
+			background-color: #1c2957;
+			color: rgb(224, 224, 224);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+
+		body.admin-body a.btn {
+			background-color: rgb(244, 244, 244);
+			color: rgb(112, 112, 112);
+			font-size: 16px;
+			padding: 4px 10px;
+		}
+		li.page-item.active>a.page-link {
+			background-color: #1c2957;
+		}
+
+		.admin-page {
+			margin-top: 10px;
+		}
+
+		.admin-page .admin-header {
+			margin-bottom: 10px;
+			font-weight: 700;
+			font-size: 22px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu {
+			border-right: 1px solid #e2e2e2;
+			padding: 0px 10px 10px 5px;
+		}
+	
+		.admin-content .left-navbar .left-navbar-menu li {
+			margin-bottom: 10px;
+		}
+
+		.admin-content .left-navbar .left-navbar-menu a {
+			width: 90%;
+			text-align: left;
+		}
+
+		.form-horizontal .control-label {
+			text-align: left;
+		}
+
+		.form-header {
+			font-size: 18px;
+			font-weight: 700;
+			margin: 10px 0;
+		}
+
+	</style>
+</head>
+<body class="admin-body">
+	<header class="header">
+        <div class="head">
+            <img class="logo" src="images/pitt-logo.png">
+        </div>
+    </header>
+	<div class="upperRightButton">
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default">Update</button>
+		<button data-toggle="modal" data-target="#staffModal" type="button" class="btn btn-default" onclick="switchMode()">Switch Mode</button>
+	</div>
+	    <div id="staffModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content login-modal" style="background-color: black; opacity: 0.95;">
+				<div class="modal-header-close" style="padding:3%">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:24px; color: white;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="padding-top: 5%;padding-right: 23%;padding-bottom: 3%;padding-left: 23%;">
+					<form role="form">
+						<div class="form-group">
+							<label for="title" style="color: white;font-size: 22px;"><b>Hi, John!</b></label>
+								<br /><br />
+						</div>
+						<div class="form-group">
+							<label for="working hours" style="color:gray; font-size: 14px;">Working Hours</label>
+								<br />
+							<span style="padding-top:8%"><label style="color:white; font-size: 16px; float: left;">Hours</label>
+							<input type="text" class="form-control" id="name" style="width: 75% ;height:25px;float:right;"
+										placeholder="13:00 -- 17:00">
+								</span>
+						</div>
+						<br /><br />
+						<div class="form-group">
+							<span>
+								<label for="working devices" style="color:gray; font-size: 14px;">Working Devices</label>
+									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
+							</span>
+							<br />
+   
+							<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
+								<select style="width: 75%">
+										<option value="1">3D Printing</option>
+										<option value="2">Virtual Reality</option>
+										<option value="3">360° Video Camera & Viewer</option>
+										<option value="4">360° Video Projector</option>
+									</select>
+							</span>                            
+						</div>
+							<br /><br />
+						<div class="form-group">
+							<label for="current event" style="color:gray; font-size: 14px;">Current Event</label>
+							<div style="background: white; padding-top: 5px;padding-right: 15px;padding-bottom: 5px;padding-left: 15px;">
+								<textarea class="form-control" rows="6" cols="80" name="current event" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
+								<button type="button" class="btn btn-default" class="upperRightButton"style="color:white; background-color:#1c2957">Post</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<div class="admin-page container">
+		<div class="admin-header">
+			Content Management
+		</div>
+		<div class="row admin-content">
+			<div class="col-md-3 left-navbar">
+				<ul class="left-navbar-menu">
+					<li><a href="./admin_users.html" class="btn" role="button">Users</a></li>
+					<li><a href="./admin_events.html" class="btn" role="button">Events</a></li>
+					<li><a href="./admin_showcases.html" class="btn" role="button">Showcases</a></li>
+					<li><a href="admin_subscribes.html" class="btn active" role="button">Subscribes</a></li>
+					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
+					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-md-9 right-content">
+				<div class="form-header">Create Subscription</div>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="inputName" class="col-sm-3 control-label">Your name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputName" placeholder="Your name" name="subscriber_name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputEmail" placeholder="Your E-mail" name="subscriber_email">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPreference" class="col-sm-3 control-label">Preference</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputPreference" placeholder="Your preference" name="subscriber_preference">
+						</div>
+					</div>
+                    <div class="form-group">
+						<label for="inputActive" class="col-sm-3 control-label">Active</label>
+						<div class="col-sm-9">
+							<input type="checkbox" class="form-control" id="inputActive" placeholder="Active" name="subscriber_isActive">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button id="submit" type="button" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>		
+	</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-en-US.js"></script>
+<script src="js/switchMode.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		function getQueryString(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) {
+				return unescape(r[2]);
+			}
+			return null;
+		}
+		var user_id = getQueryString("id");
+
+		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/subscribers/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
+
+		
+
+		$('#submit').click(function() {
+			var subscriber_isActive = "";
+ 			if($("input[name='subscriber_isActive']").prop("checked")) {
+ 				subscriber_isActive = 1;
+ 			}
+			var getParams = {
+				"fields": {
+					subscriber_name: $("input[name='subscriber_name']").val(),
+					subscriber_email: $("input[name='subscriber_email']").val(),
+					subscriber_preference: $("input[name='subscriber_preference']").val(),
+					subscriber_isActive: subscriber_isActive
+				}
+			}
+			$.ajax({
+				url: url,
+				type: 'put',
+				data: getParams,
+				dataType:'json',
+				success: function(res) {
+					if(res.fields) {
+						alert('Edit successfully!');
+						location.href = "http://localhost/isd_final/admin_subscribes.html"
+					} else {
+						alert('Edit failed!');
+					}
+				}
+			})
+		})
+
+	})
+</script>
+	
+</body>
+</html>

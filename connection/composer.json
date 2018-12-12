@@ -1,0 +1,5 @@
+{
+    "require": {
+        "swiftmailer/swiftmailer": "v5.4.0"
+    }
+}
