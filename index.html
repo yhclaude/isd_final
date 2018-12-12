@@ -56,7 +56,7 @@
 
               <!-- </form> -->
  <!--test passing parameters from parent page to the iframe -->
-           
+
     <header class="header">
         <div class="head">
             <img class="logo" src="images/pitt-logo.png">
@@ -258,7 +258,6 @@
                             </div>
                             <div class="form-group" style="padding: 15px; text-align: right; padding-right: 50px">
                                 <div class="col-sm-offset-2 col-sm-10 formButton">
-                                    <!-- <button type="button" class="btn btn-default" id="login()">Login</button> -->
                                     <button type="button" name="button" class="btn btn-default" onclick="login()">Login</button>
                                 </div>
                             </div>
@@ -295,6 +294,9 @@
 <script src="js/user.js"></script>
 <script>
     var logged = "0";
+    var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+              "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+            ];
     $(function () {
         $("#footer").load("./template/footer.html");
         $.ajax({
@@ -315,12 +317,18 @@
                 }
 
                 $.each(res.data.announcement,function(i) {
+                    var time = res.data.announcement[i].fields.event_date.split('-');
+                    var month = monthNames[parseInt(time[1])-1];
+                    var day = time[2];
+                    console.log(month+" "+day);
                     $('.announcement_tab').append('<li> \
                         <div class="row"> \
-                            <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + ' (' + res.data.announcement[i].fields.event_date + ') <img src = "https://image.flaticon.com/icons/svg/265/265683.svg" alt = "image" style="float:right;width:55px;height:55px;padding:10px"> </a> \
+                            <div class="col-md-10 col-xs-8 col-sm-10 col-8" style="margin-top:12px"> <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + ')</a></div> \
+                             <div class="col-md-2 col-xs-4 col-sm-2 col-4 ml-auto" style="margin-left:0px"><time datetime="2014-09-20" class="icon"><strong style="font-size:12px">\
+                               ' +month+'</strong><span>'+ '12' +'</span></time></div>\
                         </div> \
-                        <div class="row"> \
-                            <div class="content">' + res.data.announcement[i].fields.event_description + '</div> \
+                        <div class="row" style="margin-top:12px"> \
+                            <div class="col-md-12" style="margin-top:12px"><div class="content">' + res.data.announcement[i].fields.event_description + '</div></div>\
                         </div> \
                         <div class="row"> \
                             <div class="line"> \

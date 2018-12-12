@@ -10,6 +10,7 @@ Class Announcement {
     }
     public function homepage($params) {
         $conn = new Conn();
+
         $YouTubeLive = new EmbedYoutubeLiveStreaming(Configs::CHANNEL_ID,Configs::YOUTUBE_API_KEY);
         $result['code'] = 200;
         $result['data']['announcement'] = [];

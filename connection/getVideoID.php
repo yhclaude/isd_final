@@ -12,7 +12,7 @@ if(!$YouTubeLive->isLive)
 	echo "There is no live streaming right now! Response is (Decoded to object):<br><br>";
 	echo "<pre><code>";
 	var_dump($YouTubeLive->objectResponse);
-	// print_r($YouTubeLive->arrayResponse);
+	print_r($YouTubeLive->arrayResponse);
 	echo "</code></pre>";
 }
 else
