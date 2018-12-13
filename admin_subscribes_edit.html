@@ -158,10 +158,10 @@
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Create Subscription</div>
+				<div class="form-header">Edit subscriber</div>
 				<form class="form-horizontal">
 					<div class="form-group">
-						<label for="inputName" class="col-sm-3 control-label">Your name</label>
+						<label for="inputName" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="inputName" placeholder="Your name" name="subscriber_name">
 						</div>
@@ -178,12 +178,12 @@
 							<input type="text" class="form-control" id="inputPreference" placeholder="Your preference" name="subscriber_preference">
 						</div>
 					</div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
 						<label for="inputActive" class="col-sm-3 control-label">Active</label>
 						<div class="col-sm-9">
 							<input type="checkbox" class="form-control" id="inputActive" placeholder="Active" name="subscriber_isActive">
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
 							<button id="submit" type="button" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
@@ -233,7 +233,22 @@
 
 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/subscribers/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
 
-
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				if(res.fields) {
+					document.getElementById('inputName').value = res.fields.subscriber_name;
+					document.getElementById('inputEmail').value = res.fields.subscriber_email;
+					document.getElementById('inputPreference').value = res.fields.subscriber_preference;
+					// document.getElementById('inputAvailability').checked = (res.fields.device_isAvailable == "1") ? true: false;
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
 
 		$('#submit').click(function() {
 			var subscriber_isActive = "";
@@ -244,8 +259,8 @@
 				"fields": {
 					subscriber_name: $("input[name='subscriber_name']").val(),
 					subscriber_email: $("input[name='subscriber_email']").val(),
-					subscriber_preference: $("input[name='subscriber_preference']").val(),
-					subscriber_isActive: subscriber_isActive
+					subscriber_preference: $("input[name='subscriber_preference']").val()
+					// ,subscriber_isActive: subscriber_isActive
 				}
 			}
 			$.ajax({

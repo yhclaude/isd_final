@@ -172,6 +172,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="inputPassword" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+						</div>
+					</div>
+					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
 							<button id="submit" type="button" class="btn btn-primary"style="background-color: #1c2957;">Confirm</button>
 						</div>
@@ -218,11 +224,29 @@
 		var user_id = getQueryString("id");
  		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/users/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
 
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				console.log(res);
+				if(res.fields) {
+					document.getElementById('inputUsername').value = res.fields.username;
+					document.getElementById('inputEmail').value = res.fields.account;
+					document.getElementById('inputPassword').value = res.fields.password;
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
+
  		$('#submit').click(function() {
 			var getParams = {
 				"fields": {
 					username: $("input[name='username']").val(),
-					account: $("input[name='account']").val()
+					account: $("input[name='account']").val(),
+					password: $("input[name='password']").val()
 				}
 			};
 			$.ajax({

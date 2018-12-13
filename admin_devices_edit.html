@@ -167,10 +167,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputWorking" class="col-sm-3 control-label">Working</label>
+						<!-- <label for="inputWorking" class="col-sm-3 control-label">Working</label>
 						<div class="col-sm-9">
 							<input type="checkbox" class="form-control" id="inputWorking" name="device_isWorking">
-						</div>
+						</div> -->
                         <label for="inputAvailability" class="col-sm-3 control-label">Availability:</label>
 						<div class="col-sm-9">
 							<input type="checkbox" class="form-control" id="inputAvailability" name="device_isAvailable">
@@ -225,7 +225,20 @@
 
 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/devices/'+ user_id +'?api_key=keyHGiTKOgoyrrrm0';
 
-
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				if(res.fields) {
+					document.getElementById('inputDevicenname').value = res.fields.device_name;
+					document.getElementById('inputAvailability').checked = (res.fields.device_isAvailable == "1") ? true: false;
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
 
 		$('#submit').click(function() {
 			var de_isWork = "";

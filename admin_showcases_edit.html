@@ -158,7 +158,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Create New Showcase</div>
+				<div class="form-header">Edit Showcase</div>
 				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputTitle" class="col-sm-3 control-label">Title</label>
@@ -241,7 +241,24 @@
 
 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/showcases/' + user_id + '?api_key=keyHGiTKOgoyrrrm0';
 
-
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				if(res.fields) {
+					document.getElementById('inputTitle').value = res.fields.showcase_title;
+					document.getElementById('inputAuthor').value = res.fields.showcase_author;
+					document.getElementById('inputShowcaseTime').value = res.fields.showcase_time;
+					document.getElementById('inputDescription').value = res.fields.showcase_description;
+					document.getElementById('inputURL').value = res.fields.showcase_imageurl;
+					// TODO is active
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
 
 		$('#submit').click(function() {
 			var getParams = {

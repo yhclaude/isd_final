@@ -235,7 +235,22 @@
 
 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/logs/'+ user_id +'?api_key=keyHGiTKOgoyrrrm0';
 
-
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				if(res.fields) {
+					document.getElementById('inputUsername').value = res.fields.user_name;
+					document.getElementById('inputWorkingMachine').value = res.fields.working_machine;
+					document.getElementById('inputStartTime').value = res.fields.start_time;
+					document.getElementById('inputEndTime').value = res.fields.end_time;
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
 
 		$('#submit').click(function() {
 			var getParams = {

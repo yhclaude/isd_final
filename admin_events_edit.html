@@ -156,7 +156,7 @@
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
-				<div class="form-header">Create New logs</div>
+				<div class="form-header">Edit Event</div>
 				<form class="form-horizontal">
 					<div class="form-group">
 						<label for="inputName" class="col-sm-3 control-label">Name: </label>
@@ -180,6 +180,12 @@
 						<label for="inputTopic" class="col-sm-3 control-label">Topic: </label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="inputTopic" placeholder="Topic" name="topic">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputDescription" class="col-sm-3 control-label">Description: </label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputDescription" placeholder="Description" name="description">
 						</div>
 					</div>
 					<div style="display: none">
@@ -234,7 +240,24 @@
 
 		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/events/'+ user_id +'?api_key=keyHGiTKOgoyrrrm0';
 
-
+		$.ajax({
+			url: url,
+			type: 'GET',
+			data: null,
+			dataType:'json',
+			success: function(res) {
+				console.log(res);
+				if(res.fields) {
+					document.getElementById('inputName').value = res.fields.event_name;
+					document.getElementById('inputDate').value = res.fields.event_date;
+					document.getElementById('inputType').value = res.fields.event_topic;
+					document.getElementById('inputTopic').value = res.fields.event_type;
+					document.getElementById('inputDescription').value = res.fields.event_description;
+				} else {
+					alert('Edit failed!');
+				}
+			}
+		})
 
 		$('#submit').click(function() {
 			var getParams = {

@@ -163,13 +163,19 @@
 					<div class="form-group">
 						<label for="inputUsername" class="col-sm-3 control-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputUsername" placeholder="Enter your name please" name="username">
+							<input type="text" class="form-control" id="inputUsername" placeholder="Name" name="username">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inputEmail" class="col-sm-3 control-label">E-mail</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="inputEmail" placeholder="Your e-mail" name="account">
+							<input type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="account">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
 						</div>
 					</div>
 					<div class="form-group">
@@ -223,15 +229,18 @@
 			var getParams = {
 				"fields": {
 					username: $("input[name='username']").val(),
-					account: $("input[name='account']").val()
+					account: $("input[name='account']").val(),
+					password: $("input[name='password']").val()//
 				}
 			};
+			console.log(getParams);
 			$.ajax({
 				url: url,
 				type: 'post',
 				data: getParams,
 				dataType:'json',
 				success: function(res) {
+					console.log(res);
 					if(res.fields) {
 						alert('Add successfully!');
 						location.href = "http://localhost/isd_final/admin_users.html"

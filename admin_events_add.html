@@ -183,6 +183,12 @@
 							<input type="text" class="form-control" id="inputTopic" placeholder="Topic" name="topic">
 						</div>
 					</div>
+					<div class="form-group">
+						<label for="inputDescription" class="col-sm-3 control-label">Description: </label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="inputDescription" placeholder="Description" name="description">
+						</div>
+					</div>
 					<div style="display: none">
 						<input name="sess" value="fwesdvge">
 					</div>
@@ -243,7 +249,8 @@
 					event_name: $("input[name='name']").val(),
 					event_date: $("input[name='date']").val(),
 					event_type: $("input[name='type']").val(),
-					event_topic: $("input[name='topic']").val()
+					event_topic: $("input[name='topic']").val(),
+					event_description: $("input[name='description']").val()
 				}
 			}
 			$.ajax({

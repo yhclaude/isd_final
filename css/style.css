@@ -6477,11 +6477,11 @@ body.comment-avatars-disabled #comments .comment .comment-body {
     margin: 0 4px 4px 0
 }
 
-.comment-subscription-form {
+.comment-subscribing-form {
     margin: 0
 }
 
-.comment-subscription-form:after {
+.comment-subscribing-form:after {
     content: "";
     display: block;
     height: 0;
@@ -6490,8 +6490,8 @@ body.comment-avatars-disabled #comments .comment .comment-body {
     zoom: 1
 }
 
-.comment-subscription-form input,
-.comment-subscription-form label {
+.comment-subscribing-form input,
+.comment-subscribing-form label {
     float: left;
     font-size: .846em;
     margin: 0px !important;
