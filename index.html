@@ -145,7 +145,7 @@
                         <div role="tabpanel" class="tab-pane active" id="open_lab">
                             <div>
                                 <div id="streaming_title" class="open_lab_title">
-                                    Now We are streaming
+                                    Now we are streaming
                                 </div>
                                 <div class="open_lab_content">
                                     <iframe id="ytplayer" type="text/html" width="640" height="360" src="https://www.youtube.com/embed/" frameborder="0"></iframe>
@@ -162,8 +162,9 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="showcase">
                             <div class="row showcaseDiv">
-
-                                <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>
+                                <div class="col-md-12">
+                                    <iframe id="lightroom" src="./lightroom.html" frameborder="0" width="640" height="360"></iframe>
+                                </div>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="schedule">
@@ -175,7 +176,26 @@
                 </div>
             </div>
         </div>
-        <div id="footer"></div>
+        <div id="footer">
+            <div class="row">
+                <hr>
+            </div>
+            <div class="row col-8">
+                <div class="col-6 col-offset-3 col-md-6 col-md-offset-3">
+
+                    <div class="col-sm-8 col-xs-8">
+                        <p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
+                        <p><span data-feather="phone" style="width:14px; height:14px;"></span> 412-624-3335</p>
+                        <p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
+                    </div>
+
+                    <div class="col">
+                        <a data-toggle="modal" data-target="#userModal">Staff Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <div id="subscribeModal" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
@@ -192,7 +212,7 @@
                             <br />
                         </div>
                         <div class="form-group">
-                            <label for="name" style="color: white; font-size: 16px;">name</label>
+                            <label for="name" style="color: white; font-size: 16px;">Name</label>
                             <input type="text" class="form-control" id="subsname" >
                         </div>
                         <div class="form-group">
@@ -216,8 +236,6 @@
                                     <label><input type="checkbox" name = "check" value="360°VideoProjector">360° Video Projector</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <div class="formButton" style="padding-top: 10px;padding-right: 120px;padding-bottom: 10px;padding-left: 120px;">
                                 <button type="button" class="btn btn-default" class="upperRightButton" onclick="subscribeSend()">Subscribe</button>
                             </div>
@@ -238,7 +256,7 @@
                 </div>
                 <div class="modal-body" style="font-size: 14px">
                     <div class="title">
-                        Hi, Welcome back!
+                        Hi, welcome back!
                         <br />
                     </div>
                     <div class="row">
@@ -267,23 +285,6 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
-            <hr>
-            <div class="col-sm-8 col-xs-8">
-                <p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
-                <p><span data-feather="phone" style="width:14px; height:14px;"></span> 412-624-3335</p>
-                <p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
-            </div>
-
-            <div class="col">
-                <a data-toggle="modal" data-target="#userModal">Staff Login</a>
-            </div>
-
-        </div>
-    </div>
-
 </body>
 <!-- Icons -->
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
@@ -298,7 +299,7 @@
               "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
             ];
     $(function () {
-        $("#footer").load("./template/footer.html");
+        // $("#footer").load("./template/footer.html");
         $.ajax({
             url: 'http://localhost/isd_final/connection/index.php/announcement/homepage',
             type: 'get',
@@ -335,14 +336,14 @@
                                 <hr/> \
                             </div> \
                         </div> \
-                        <div class="row"> \
-                            <div class="col-md-4"> \
+                        <div class="row"> <div class="content">\
+                            <div class="col-md-4 announcement-content"> Topic:\
                                 ' + res.data.announcement[i].fields.event_topic + ' \
                             </div> \
-                            <div class="col-md-4"> \
+                            <div class="col-md-4 announcement-content"> Event Type:\
                                 ' + res.data.announcement[i].fields.event_type + '  \
                             </div> \
-                        </div> \
+                        </div></div> \
                     </li>');
                 })
 
@@ -467,7 +468,6 @@
 
     function postSend(){
         var url = "http://localhost/isd_final/connection/index.php/logs";
-
         var name = document.getElementById("logtitle").innerText;
         name = name.split(" ");
         name = name[1];
@@ -479,10 +479,8 @@
         }
 
         var device = document.getElementById("device");
-
         var index = device.selectedIndex;
         var device = device.options[index].text;
-
         var start = document.getElementById("start_time");
         var end = document.getElementById("end_time");
         start = start.value;
