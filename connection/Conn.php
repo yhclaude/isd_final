@@ -113,6 +113,8 @@ class Conn
         }
         if(isset($queries['sort'])) {
             $url.=$queries['sort'];
+        } else {
+            $url = $url."&sort%5B0%5D%5Bfield%5D=".substr($segs[0], 0, -1)."_id&sort%5B0%5D%5Bdirection%5D=desc";
         }
         return $url;
     }

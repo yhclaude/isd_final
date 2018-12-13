@@ -10,13 +10,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" || $_SERVER['REQUEST_METHOD'] === "PUT
 
 // Check session
 $user = new Users();
-
+$conn = new Conn();
 if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     echo $user->login($r);
     return;
-} else if ($r['segs'][0] == 'logs' && count($r['segs'])==1 && $_SERVER['REQUEST_METHOD'] === "GET") {
-    $r['queries']['sort'] = '&sort%5B0%5D%5Bfield%5D=log_id&sort%5B0%5D%5Bdirection%5D=desc';
-
+} else if ($r['segs'][0] == 'logs' && count($r['segs'])==2 && $_SERVER['REQUEST_METHOD'] === "GET") {
+    $r['queries']['sort'] = '&sort%5B0%5D%5Bfield%5D=log_id&sort%5B0%5D%5Bdirection%5D=desc&pageSize=1';
+    $r['segs'] = ['logs'];
+    // echo $conn->getUrl($r);
+    $res =  json_decode($conn->getArrays($r), true);
+    $end_time = $res['data'][0]['fields']['end_time'];//str_replace($res['data'][0]['fields']['end_time'],'T',' ');
+    $timezone = 'America/New_York';
+    $dtUtcDate = strtotime($end_time. ' '. $timezone);
+    $now = time();
+    $res['isworking'] = (($now < $dtUtcDate)) ? true : false;
+    echo json_encode($res);
+    exit;
 } else if ( $r['segs'][0]== 'announcement') {
     include_once('annoucement.php');
     $anno = new Announcement();
@@ -38,8 +47,6 @@ if ($r['segs'][0] == 'users' && $r['segs'][1] == 'login') {
     //     }
     // }
 }
-
-$conn = new Conn();
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         echo $conn->getArrays($r);

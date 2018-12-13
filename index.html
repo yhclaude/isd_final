@@ -377,9 +377,9 @@
         var scheduleBtn = document.getElementById("schedule");
         scheduleBtn.innerHTML = (name)? "Switch Mode" : "Schedule"
 
-        var button = document.getElementById("subscribe");
-        button.innerHTML =  (name)? "Update" : "Subscribe";
-
+        var subButton = document.getElementById("subscribe");
+        subButton.innerHTML =  (name)? "Update" : "Subscribe";
+        subButton.style.visibility = (name)? "hidden" : "visible";
         window.scrollTo(0, 0);
     }
 

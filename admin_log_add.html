@@ -252,12 +252,13 @@
 				data: getParams,
 				dataType:'json',
 				success: function(res) {
-					if(res.fields) {
-						alert('Add successfully!');
-						location.href = "http://localhost/isd_final/admin_log.html"
-					} else {
-						alert('Add failed!');
-					}
+					console.log(res);					
+					// if(res.fields) {
+					// 	alert('Add successfully!');
+					// 	location.href = "http://localhost/isd_final/admin_log.html"
+					// } else {
+					// 	alert('Add failed!');
+					// }
 				}
 			})
 		})
