@@ -13,7 +13,7 @@
 		a:hover {
 			cursor: pointer;
 		}
-        
+
 		body.admin-body {
 			color: rgb(112, 112, 112);
 		}
@@ -67,7 +67,7 @@
 			border-right: 1px solid #e2e2e2;
 			padding: 0px 10px 10px 5px;
 		}
-	
+
 		.admin-content .left-navbar .left-navbar-menu li {
 			margin-bottom: 10px;
 		}
@@ -160,7 +160,7 @@
 									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
 							</span>
 							<br />
-   
+
 							<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
 								<select style="width: 75%">
 										<option value="1">3D Printing</option>
@@ -168,7 +168,7 @@
 										<option value="3">360° Video Camera & Viewer</option>
 										<option value="4">360° Video Projector</option>
 									</select>
-							</span>                            
+							</span>
 						</div>
 							<br /><br />
 						<div class="form-group">
@@ -186,7 +186,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
@@ -203,12 +203,12 @@
 					<li><a href="admin_subscribes.html" class="btn active" role="button">Subscribes</a></li>
 					<li><a href="./admin_devices.html" class="btn" role="button">Devices</a></li>
 					<li><a href="./admin_log.html" class="btn" role="button">Logs</a></li>
-					
+
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
 				<ul class="right-content-ul">
-					
+
 				</ul>
 				<div class="pull-right pagination">
 					<ul class="pagination">
@@ -225,13 +225,32 @@
 				</div>
 			</div>
 		</div>
-			
+		<div id="footer">
+			<div class="row">
+				<hr>
+			</div>
+			<div class="row col-8">
+				<div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
+
+					<div class="col-sm-8 col-xs-8">
+						<p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
+						<p><span data-feather="phone" style="width:14px; height:14px;"></span> 412-624-3335</p>
+						<p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
+					</div>
+
+					<div class="col" id="login-button">
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
 <script src="js/switchMode.js"></script>
+<script src="js/user.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -283,7 +302,7 @@
 							$('.right-content-ul').find('li').eq(i).append($div1).append($div2).append($div3);
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).append($divName).append($divWork).append($divEditDelete);
 
-							// name 
+							// name
 							$('.right-content-ul').find('li').eq(i).find('div.row').eq(0).find('div.col-md-4').append('<span>' + res.data[i].fields.subscriber_name + '</span>');
 
 							// email
@@ -308,9 +327,9 @@
 
 
 							// edit and delete with id
-                            $('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href', 'admin_subscribes_edit.html?id=' + res.data[i].id);						
+                            $('.right-content-ul>li').eq(i).find('.function-div a').eq(0).attr('href', 'admin_subscribes_edit.html?id=' + res.data[i].id);
                             $('.right-content-ul>li').eq(i).find('.function-div a').eq(1).attr('data',res.data[i].id);
-                            
+
 							if (res.offset) {
 								var offsetArr = $('#pageNumber').data('offset');
 								offsetArr[$('#pageNumber').html()] = res.offset;
@@ -318,7 +337,7 @@
 							} else {
 								$('.page-next a').attr('disabled', 'true');
 							}
-							
+
 						})
 						// click show hide
 						$('.right-content-ul > li').each(function(){
@@ -334,12 +353,12 @@
 								e.stopPropagation();
 							})
 						})
-					} 
+					}
 					else {
 						var val = parseInt($('#pageNumber').html()) - 1;
 						$('#pageNumber').html(val);
-						
-					}	
+
+					}
 				},
 				error: function(err) {
 					console.log(err.responseText);
@@ -357,7 +376,7 @@
 		$('.page-pre a').click(function() {
 			changePage(-1, 'http://localhost/isd_final/connection/index.php/subscribers', 'get');
 		});
-        
+
         $('.right-content-ul > li > .function-div > .delete > a').click(function(){
 			$.ajax({
 				url: 'http://localhost/isd_final/connection/index.php/subscribers/' + $(this).attr('data'),
@@ -377,7 +396,13 @@
 			})
 		})
 	})
+	User.renderBtn();
 </script>
-	
+
 </body>
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
 </html>

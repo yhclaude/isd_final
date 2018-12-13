@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/bootstrap-table.css">
 	<link href="css/style.css" rel="stylesheet">
 	<style>
-		
+
 		body.admin-body {
 			color: rgb(112, 112, 112);
 		}
@@ -52,7 +52,7 @@
 			border-right: 1px solid #e2e2e2;
 			padding: 0px 10px 10px 5px;
 		}
-	
+
 		.admin-content .left-navbar .left-navbar-menu li {
 			margin-bottom: 10px;
 		}
@@ -113,7 +113,7 @@
 									<!-- <a href="#" style="color:white; font-size: 12px; float:right;"><u>Add</u></a> -->
 							</span>
 							<br />
-   
+
 							<span style="padding:8%"><label style="color:white; font-size: 16px; float: left;">Device</label>
 								<select style="width: 75%">
 										<option value="1">3D Printing</option>
@@ -121,7 +121,7 @@
 										<option value="3">360° Video Camera & Viewer</option>
 										<option value="4">360° Video Projector</option>
 									</select>
-							</span>                            
+							</span>
 						</div>
 							<br /><br />
 						<div class="form-group">
@@ -139,7 +139,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	<div class="admin-page container">
 		<div class="admin-header">
 			Content Management
@@ -153,7 +153,7 @@
 					<li><a href="admin_subscribes.html" class="btn" role="button">Subscribes</a></li>
 					<li><a href="admin_devices.html" class="btn active" role="button">Devices</a></li>
 					<li><a href="admin_log.html" class="btn" role="button">Logs</a></li>
-					
+
 				</ul>
 			</div>
 			<div class="col-md-9 right-content">
@@ -183,13 +183,32 @@
 				</form>
 			</div>
 		</div>
-			
+		<div id="footer">
+			<div class="row">
+				<hr>
+			</div>
+			<div class="row col-8">
+				<div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
+
+					<div class="col-sm-8 col-xs-8">
+						<p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
+						<p><span data-feather="phone" style="width:14px; height:14px;"></span> 412-624-3335</p>
+						<p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
+					</div>
+
+					<div class="col" id="login-button">
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-en-US.js"></script>
 <script src="js/switchMode.js"></script>
+<script src="js/user.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
  		function getQueryString(name) {
@@ -202,7 +221,7 @@
 		}
 		var user_id = getQueryString("id");
  		var url = 'https://api.airtable.com/v0/app1dnIEPdyN4RDwi/devices/?api_key=keyHGiTKOgoyrrrm0';
- 		
+
  		$('#submit').click(function() {
  			var de_isWork = "";
  			var de_isAvail = "";
@@ -235,7 +254,13 @@
 			})
 		})
  	})
+	User.renderBtn();
 </script>
-	
+
 </body>
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
 </html>

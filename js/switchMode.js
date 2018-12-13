@@ -1,4 +1,5 @@
 	function switchMode(){
+		console.log("WTF, SWITCH");
 		var logged = location.href;
         var len = logged.length;
         var start = logged.indexOf("=");

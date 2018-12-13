@@ -64,7 +64,7 @@
     </header>
     <div class="upperRightButton">
         <button id="subscribe" type="button" class="btn btn-default" onclick="subClick()">Subscribe</button>
-        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="contact" onclick="schedule()">Schedule</button>
+        <button data-toggle="modal" data-target="#" type="button" class="btn btn-default" id="schedule" onclick="schedule()">Schedule</button>
     </div>
     <div id="staffModal" class="modal fade" role="dialog">
             <div class="modal-dialog" role="document">
@@ -181,7 +181,7 @@
                 <hr>
             </div>
             <div class="row col-8">
-                <div class="col-6 col-offset-3 col-md-6 col-md-offset-3">
+                <div class="col-8 col-offset-2 col-md-8 col-md-offset-2">
 
                     <div class="col-sm-8 col-xs-8">
                         <p><span data-feather="map-pin" style="width:14px; height:14px;"></span> 227 Fifth Avenue, Pittsburgh, PA 15260</p>
@@ -189,8 +189,7 @@
                         <p><span data-feather="inbox" style="width:14px; height:14px;"></span> Email: teaching@pitt.edu</p>
                     </div>
 
-                    <div class="col">
-                        <a data-toggle="modal" data-target="#userModal">Staff Login</a>
+                    <div class="col" id="login-button">
                     </div>
 
                 </div>
@@ -264,14 +263,14 @@
                             <div class="form-group" style="padding: 15px">
                                 <label for="inputName" class="col-sm-2 control-label">Account: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName" style="width: 90%;">
+                                    <input type="text" class="form-control" id="inputName" style="width: 90%;" autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group" style="padding: 15px">
                                 <label for="inputPassword" class="col-sm-2 control-label">Password: </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputPassword" style="width: 90%;">
+                                    <input type="password" class="form-control" id="inputPassword" style="width: 90%;">
                                 </div>
                             </div>
                             <div class="form-group" style="padding: 15px; text-align: right; padding-right: 50px">
@@ -299,7 +298,6 @@
               "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
             ];
     $(function () {
-        // $("#footer").load("./template/footer.html");
         $.ajax({
             url: 'http://localhost/isd_final/connection/index.php/announcement/homepage',
             type: 'get',
@@ -324,7 +322,7 @@
                     console.log(month+" "+day);
                     $('.announcement_tab').append('<li> \
                         <div class="row"> \
-                            <div class="col-md-10 col-xs-8 col-sm-10 col-8" style="margin-top:12px"> <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + ')</a></div> \
+                            <div class="col-md-10 col-xs-8 col-sm-10 col-8" style="margin-top:12px"> <a href="https://teaching.pitt.edu/newsletter/" class="title">' + res.data.announcement[i].fields.event_name + '</a></div> \
                              <div class="col-md-2 col-xs-4 col-sm-2 col-4 ml-auto" style="margin-left:0px"><time datetime="2014-09-20" class="icon"><strong style="font-size:12px">\
                                ' +month+'</strong><span>'+ '12' +'</span></time></div>\
                         </div> \
@@ -354,6 +352,39 @@
         })
     });
 
+    renderBtn();
+    function renderBtn() {
+        var name = localStorage.getItem('username');
+        var sess = localStorage.getItem('sess');
+        //???
+        var title = document.getElementById("logtitle");
+        title.innerHTML = (name)? "<b>Hi, " + name + "!</b>" : "Unkown";
+        // loginBtn
+        var loginDiv = document.getElementById("login-button");
+        if (sess) {
+            loginDiv.innerHTML= '<a id="loginBtn" onclick="logout()">Staff Login</a>';
+        } else {
+            loginDiv.innerHTML = '<a data-toggle="modal" data-target="#userModal" id="loginBtn">Staff Login</a>';
+        }
+
+        var loginBtn = document.getElementById("loginBtn");
+        loginBtn.innerHTML = (name)? ("Hi, "+name+" | "+" Logout") : "Staff Login"
+
+        //switch mode
+        var scheduleBtn = document.getElementById("schedule");
+        scheduleBtn.innerHTML = (name)? "Switch Mode" : "Schedule"
+
+        var button = document.getElementById("subscribe");
+        button.innerHTML =  (name)? "Update" : "Subscribe";
+
+        window.scrollTo(0, 0);
+    }
+
+    function logout() {
+        localStorage.clear();
+        renderBtn();
+    }
+
     function login() {
         console.log("./connection/index.php/users/login?account=" + $("#inputName").text + "&password=" + $(
             "#inputPassword").text);
@@ -361,7 +392,6 @@
         var username = document.getElementById("inputName").value;
         var password = document.getElementById("inputPassword").value;
         var url = "./connection/index.php/users/login";
-        console.log(localStorage.getItem("code"));
         var param = {
             "account": username,
             "password": password,
@@ -375,13 +405,11 @@
                 console.log(resultData);
                 var res = resultData;
                 if (res.code == 200) {
+                    localStorage.setItem('username', res.data.username);
+                    localStorage.setItem('sess', res.data.sess);
                     subcategorys = res.data;
-                    var title = document.getElementById("logtitle");
-                    title.innerHTML = "<b>Hi, " + subcategorys.username + "!</b>"
-                    var button = document.getElementById("subscribe");
-                    button.innerHTML = "Update";
                     logged = "1";
-
+                    renderBtn();
                     document.getElementById("inputName").value = "";
                     document.getElementById("inputPassword").value = "";
 
@@ -452,14 +480,9 @@
     }
 
     function schedule() {
-        if(logged == "0"){
-            logged = location.href;
-            var len = logged.length;
-            var start = logged.indexOf("=");
-            logged = logged.substring(start+1, len);
-        }
-        if(logged == "1"){
-            window.location.href = "http://localhost/isd_final/admin_users.html" + "?logged=" + logged;
+        var sess = localStorage.getItem('sess');
+        if(sess){
+            window.location.href = "http://localhost/isd_final/admin_users.html";
         }
         else{
             window.location.href = "https://pitt.co1.qualtrics.com/jfe/form/SV_3QyY0T8qPsRRpqt";
